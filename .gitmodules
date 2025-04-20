@@ -1,0 +1,3 @@
+[submodule "YAFS"]
+	path = YAFS
+	url = https://github.com/acsicuib/YAFS.git
