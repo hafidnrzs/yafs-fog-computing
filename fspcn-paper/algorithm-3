@@ -1,0 +1,35 @@
+# Place sorted applications by deadlines in the communities
+for appId in SAL do:
+  # Read request list of app
+  for reqId in ARL[appId] do:
+    # find the home community which the requester is connected to it
+    commId = search(communities, reqId):
+  if appId in existing-placement(appId, commId) then:
+    break
+  else:
+    # check if there are sufficient resources in home communities then place app
+    for service in SAL[appId] do:
+      for dev in community[commId] do:
+        if there are sufficient resources in dev then:
+          placementMatrix[service] = dev
+          nserv =+ 1
+    if nserv === | SAL[appId] | then:
+      remaining-resources = update(community(resources[appId], commId))
+      existing-placement.append(appId, commId)
+    else:
+      # Find neighbor communities with sufficient resources for app placement
+      for item in neighborRank[commId] do:
+        commRank = item[0]
+        rankId = item[1]
+        if commRank <= rank_threshold then:
+          nserv = 0
+          for service in SAL[appId] do:
+            for dev in community[rankId] do:
+              if there are sufficient resources in dev then:
+                placementMatrix[service] = dev
+                nserv =+ 1
+        if nserv === | SAL[appId] | then:
+          remaining-resources = update(community(resources[appId], rankId))
+          existing-placement.append(appId, rankId)
+          break
+return placementMatrix

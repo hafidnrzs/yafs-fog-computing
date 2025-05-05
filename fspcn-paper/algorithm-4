@@ -1,0 +1,4 @@
+D = shortest-path(f_s, f_d)
+for each f_i in D do:
+  reqAppDelay.append(Delay (f_i, f_j+1)
+  return average(reqAppDelay))

@@ -1,0 +1,8 @@
+serviceList <- list the services of an aplication
+for each service in serviceList do:
+  device <- placementMatrix(service)
+  deviceList.append(device)
+for each devId1, devId2 in deviceList do:
+  if there is a path(devId1, devId2) then:
+    services_Delay.append(ADRA (devId1, devId2))
+return average(services_Delay)

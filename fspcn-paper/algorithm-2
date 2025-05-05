@@ -1,0 +1,12 @@
+# Generate communities by genetic algorithm
+C <- Communities resulted from genetic algorithm
+# Calculate neighborhood distance list for each community C_i in C
+for C_i in C do:
+  for C_j in C do:
+    # find common neighbors between each two communities C_i,  C_j
+    neighborNumber = G.common_neighbors(C_i, C_j)
+    neighborDistance[commRank][i].append(1 / len(len(neighborNumber))
+    neighborDistance[commId][i].append(j))
+# sort communities based on neighborhood distance
+for C_i in C do:
+  neighborRank[i] = sort(neighborDistance[i], key = commRank, ascending order)
