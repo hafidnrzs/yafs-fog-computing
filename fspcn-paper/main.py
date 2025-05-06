@@ -191,6 +191,115 @@ def create_topology():
     # Deploy services
     # s.deploy_app(app, placement, selector)
 
+def visualize_layered_topology(graph_to_draw, title="Layered Topology", save_path=None):
+    """
+    Memvisualisasikan graf NetworkX dengan layout berlapis.
+    :param graph_to_draw: Objek graf NetworkX yang akan divisualisasikan.
+    :param title: Judul untuk plot.
+    :param save_path: Path untuk menyimpan gambar hasil visualisasi.
+    """
+    if graph_to_draw.number_of_nodes() == 0:
+        print("Graph is empty, skipping drawing.")
+        return
+
+    print(f"\nAttempting to draw: {title}...")
+    plt.figure(figsize=(18, 12)) # Ukuran figure bisa disesuaikan
+    pos = {}
+    node_colors = []
+    node_sizes = []
+    node_labels = {}
+
+    # Definisikan level Y untuk setiap lapisan
+    y_cloud = 4.0
+    y_cfg = 3.5
+    y_fog_main_upper = 3 # Batas atas untuk fog nodes biasa (sedikit dinaikkan)
+    y_fog_main_lower = 0.5 # Batas bawah untuk fog nodes biasa (sedikit diturunkan)
+    y_fg = 0.0
+
+    # Kelompokkan node berdasarkan tipe/level
+    cloud_nodes = [n for n, d in graph_to_draw.nodes(data=True) if d.get('level') == 'cloud']
+    cfg_nodes = [n for n, d in graph_to_draw.nodes(data=True) if d.get('type') == 'CFG']
+    fg_nodes = [n for n, d in graph_to_draw.nodes(data=True) if d.get('type') == 'FG']
+    main_fog_nodes = [n for n, d in graph_to_draw.nodes(data=True)
+                      if d.get('level') == 'fog' and n not in cfg_nodes and n not in fg_nodes]
+
+    def distribute_nodes_x(nodes, y_level, x_spacing=1.0, x_center_offset=0.0):
+        positions = {}
+        if not nodes: return positions
+        # Hitung total lebar yang dibutuhkan dan geser agar terpusat
+        total_width = (len(nodes) - 1) * x_spacing
+        start_x = x_center_offset - total_width / 2
+        for i, node in enumerate(nodes):
+            positions[node] = (start_x + i * x_spacing, y_level)
+        return positions
+
+    pos.update(distribute_nodes_x(cloud_nodes, y_cloud, x_spacing=2.0))
+    pos.update(distribute_nodes_x(cfg_nodes, y_cfg, x_spacing=1.2))
+    pos.update(distribute_nodes_x(fg_nodes, y_fg, x_spacing=1.0))
+
+    if main_fog_nodes:
+        subgraph_main_fog = graph_to_draw.subgraph(main_fog_nodes)
+        if subgraph_main_fog.number_of_nodes() > 0:
+            # Coba k yang lebih besar untuk penyebaran lebih luas, atau lebih kecil untuk lebih rapat
+            k_val = 0.8 / ((len(subgraph_main_fog))**0.4) if len(subgraph_main_fog) > 1 else 0.8
+            pos_main_fog_raw = nx.spring_layout(subgraph_main_fog, seed=42, k=k_val, iterations=60)
+            
+            min_x = min(p[0] for p in pos_main_fog_raw.values()) if pos_main_fog_raw else 0
+            max_x = max(p[0] for p in pos_main_fog_raw.values()) if pos_main_fog_raw else 0
+            min_y = min(p[1] for p in pos_main_fog_raw.values()) if pos_main_fog_raw else 0
+            max_y = max(p[1] for p in pos_main_fog_raw.values()) if pos_main_fog_raw else 0
+
+            span_x = max_x - min_x if max_x > min_x else 1.0
+            span_y = max_y - min_y if max_y > min_y else 1.0
+            
+            # Lebar X yang diinginkan untuk lapisan fog utama, coba buat lebih lebar
+            desired_x_width_fog = max((len(cfg_nodes)-1)*1.2, (len(fg_nodes)-1)*1.0, (len(main_fog_nodes)-1)*0.4, 5.0)
+
+
+            for node, (x, y) in pos_main_fog_raw.items():
+                norm_x = ((x - min_x) / span_x - 0.5) * desired_x_width_fog if span_x > 0 else 0
+                norm_y = y_fog_main_lower + ((y - min_y) / span_y) * (y_fog_main_upper - y_fog_main_lower) if span_y > 0 else (y_fog_main_lower+y_fog_main_upper)/2
+                pos[node] = (norm_x, norm_y)
+        else: # Jika hanya satu main_fog_node
+            for node in main_fog_nodes:
+                pos[node] = (0, (y_fog_main_lower + y_fog_main_upper)/2)
+
+    for node in graph_to_draw.nodes():
+        if node not in pos: # Jaring pengaman jika ada node terlewat
+            pos[node] = (random.uniform(-3, 3), random.uniform(0.5, 3.5))
+        
+        node_data = graph_to_draw.nodes[node]
+        node_labels[node] = node # Hanya nama node
+        
+        node_type = node_data.get('type')
+        if node_type == 'cloud_server': node_colors.append('deepskyblue'); node_sizes.append(1200)
+        elif node_type == 'CFG': node_colors.append('red'); node_sizes.append(700)
+        elif node_type == 'FG': node_colors.append('limegreen'); node_sizes.append(600)
+        else: node_colors.append('silver'); node_sizes.append(400) # Warna lebih terang untuk fog
+
+    nx.draw_networkx_nodes(graph_to_draw, pos, node_color=node_colors, node_size=node_sizes, alpha=0.9)
+    nx.draw_networkx_edges(graph_to_draw, pos, alpha=0.4, edge_color="dimgray", width=0.8)
+    nx.draw_networkx_labels(graph_to_draw, pos, labels=node_labels, font_size=6, font_weight='bold')
+
+    plt.title(title, fontsize=18)
+    plt.xticks([])
+    plt.yticks([])
+    # Menambahkan garis pemisah antar layer (opsional)
+    plt.axhline(y=(y_cloud + y_cfg) / 2, color='gray', linestyle='--', linewidth=0.7)
+    plt.axhline(y=(y_cfg + y_fog_main_upper) / 2, color='gray', linestyle='--', linewidth=0.7)
+    plt.axhline(y=(y_fg + y_fog_main_lower) / 2, color='gray', linestyle='--', linewidth=0.7)
+    
+    # Menambahkan label layer (opsional)
+    plt.text(plt.xlim()[0] - 0.5, y_cloud, 'Cloud Layer', ha='right', va='center', fontsize=10, color='gray')
+    plt.text(plt.xlim()[0] - 0.5, (y_cfg + y_fog_main_upper)/2 , 'Upper Fog (CFG)', ha='right', va='center', fontsize=10, color='gray')
+    plt.text(plt.xlim()[0] - 0.5, (y_fog_main_lower + y_fog_main_upper)/2, 'Fog Layer', ha='right', va='center', fontsize=10, color='gray')
+    plt.text(plt.xlim()[0] - 0.5, y_fg, 'Edge Fog (FG)', ha='right', va='center', fontsize=10, color='gray')
+
+    plt.box(False) # Menghilangkan box di sekitar plot
+    plt.tight_layout(pad=1.0) # Tambahkan padding
+    plt.savefig(folder_results+"topology_visualization.png") # Simpan sebagai file PNG
+    print(f"Plot saved to {save_path}/topology_visualization.png")
+
 if __name__ == "__main__":
     folder_results = Path("./results/")
     folder_results.mkdir(parents=True, exist_ok=True)
@@ -204,4 +313,5 @@ if __name__ == "__main__":
     # Simpan topology ke file GEXF untuk visualisasi
     nx.write_gexf(t.G,folder_results + f"graph_barabasi_albert_{BARABASI_M}.gexf")
 
-    # Analyzing the results
+    # Visualisasikan topologi yang sudah dibuat
+    visualize_layered_topology(t.G, title="Topology Visualization", save_path=folder_results)
