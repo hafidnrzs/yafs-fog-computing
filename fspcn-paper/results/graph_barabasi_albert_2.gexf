@@ -1,0 +1,2156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2025-05-07">
+    <creator>NetworkX 3.4.2</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="5" title="BW" type="long" />
+      <attribute id="6" title="PR" type="long" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="RAM" type="long" />
+      <attribute id="1" title="IPT" type="long" />
+      <attribute id="2" title="STO" type="double" />
+      <attribute id="3" title="level" type="string" />
+      <attribute id="4" title="type" type="string" />
+    </attributes>
+    <nodes>
+      <node id="fog_0" label="fog_0">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="134" />
+          <attvalue for="2" value="51.18800885107515" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="CFG" />
+        </attvalues>
+      </node>
+      <node id="fog_1" label="fog_1">
+        <attvalues>
+          <attvalue for="0" value="24" />
+          <attvalue for="1" value="791" />
+          <attvalue for="2" value="49.034988282655966" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="CFG" />
+        </attvalues>
+      </node>
+      <node id="fog_2" label="fog_2">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="352" />
+          <attvalue for="2" value="73.57820392779554" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_3" label="fog_3">
+        <attvalues>
+          <attvalue for="0" value="11" />
+          <attvalue for="1" value="751" />
+          <attvalue for="2" value="23.76870041271978" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_4" label="fog_4">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="293" />
+          <attvalue for="2" value="44.412284967222114" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="CFG" />
+        </attvalues>
+      </node>
+      <node id="fog_5" label="fog_5">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="365" />
+          <attvalue for="2" value="83.83495236821437" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="CFG" />
+        </attvalues>
+      </node>
+      <node id="fog_6" label="fog_6">
+        <attvalues>
+          <attvalue for="0" value="18" />
+          <attvalue for="1" value="193" />
+          <attvalue for="2" value="74.61804448887393" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="CFG" />
+        </attvalues>
+      </node>
+      <node id="fog_7" label="fog_7">
+        <attvalues>
+          <attvalue for="0" value="25" />
+          <attvalue for="1" value="352" />
+          <attvalue for="2" value="17.662010107941605" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_8" label="fog_8">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="870" />
+          <attvalue for="2" value="33.34358502383444" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_9" label="fog_9">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="793" />
+          <attvalue for="2" value="17.924561767871833" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_10" label="fog_10">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="944" />
+          <attvalue for="2" value="98.50376891193036" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_11" label="fog_11">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="572" />
+          <attvalue for="2" value="20.095097064993116" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_12" label="fog_12">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="208" />
+          <attvalue for="2" value="85.41860897649228" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_13" label="fog_13">
+        <attvalues>
+          <attvalue for="0" value="24" />
+          <attvalue for="1" value="841" />
+          <attvalue for="2" value="35.80883472841437" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_14" label="fog_14">
+        <attvalues>
+          <attvalue for="0" value="11" />
+          <attvalue for="1" value="774" />
+          <attvalue for="2" value="72.36291548683008" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_15" label="fog_15">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="738" />
+          <attvalue for="2" value="72.66029347818385" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_16" label="fog_16">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="667" />
+          <attvalue for="2" value="38.24052966512276" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_17" label="fog_17">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="459" />
+          <attvalue for="2" value="80.8312612637104" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_18" label="fog_18">
+        <attvalues>
+          <attvalue for="0" value="11" />
+          <attvalue for="1" value="805" />
+          <attvalue for="2" value="71.36202926783446" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_19" label="fog_19">
+        <attvalues>
+          <attvalue for="0" value="11" />
+          <attvalue for="1" value="652" />
+          <attvalue for="2" value="15.851977912009488" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_20" label="fog_20">
+        <attvalues>
+          <attvalue for="0" value="10" />
+          <attvalue for="1" value="598" />
+          <attvalue for="2" value="2.197545435476126" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_21" label="fog_21">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="518" />
+          <attvalue for="2" value="40.410382767861094" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_22" label="fog_22">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="923" />
+          <attvalue for="2" value="84.15227221589572" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_23" label="fog_23">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="397" />
+          <attvalue for="2" value="30.17609664663748" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_24" label="fog_24">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="385" />
+          <attvalue for="2" value="53.92563944165164" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_25" label="fog_25">
+        <attvalues>
+          <attvalue for="0" value="24" />
+          <attvalue for="1" value="498" />
+          <attvalue for="2" value="31.852180917373342" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_26" label="fog_26">
+        <attvalues>
+          <attvalue for="0" value="11" />
+          <attvalue for="1" value="540" />
+          <attvalue for="2" value="0.2766193695430984" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_27" label="fog_27">
+        <attvalues>
+          <attvalue for="0" value="15" />
+          <attvalue for="1" value="407" />
+          <attvalue for="2" value="76.90565639247022" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_28" label="fog_28">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="176" />
+          <attvalue for="2" value="62.752300023462176" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_29" label="fog_29">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="810" />
+          <attvalue for="2" value="31.29114840292996" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_30" label="fog_30">
+        <attvalues>
+          <attvalue for="0" value="24" />
+          <attvalue for="1" value="403" />
+          <attvalue for="2" value="77.11032721458626" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_31" label="fog_31">
+        <attvalues>
+          <attvalue for="0" value="16" />
+          <attvalue for="1" value="630" />
+          <attvalue for="2" value="17.77646262823058" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_32" label="fog_32">
+        <attvalues>
+          <attvalue for="0" value="25" />
+          <attvalue for="1" value="456" />
+          <attvalue for="2" value="42.65068300076188" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_33" label="fog_33">
+        <attvalues>
+          <attvalue for="0" value="25" />
+          <attvalue for="1" value="828" />
+          <attvalue for="2" value="61.249092399963075" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_34" label="fog_34">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="612" />
+          <attvalue for="2" value="97.56423389353299" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_35" label="fog_35">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="632" />
+          <attvalue for="2" value="55.49508728388605" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_36" label="fog_36">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="260" />
+          <attvalue for="2" value="42.4701622845406" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_37" label="fog_37">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="570" />
+          <attvalue for="2" value="77.62346993477473" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_38" label="fog_38">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="278" />
+          <attvalue for="2" value="14.866596026966448" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_39" label="fog_39">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="417" />
+          <attvalue for="2" value="67.25463916062233" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_40" label="fog_40">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="827" />
+          <attvalue for="2" value="84.31849516769651" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_41" label="fog_41">
+        <attvalues>
+          <attvalue for="0" value="10" />
+          <attvalue for="1" value="482" />
+          <attvalue for="2" value="34.52981473418306" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_42" label="fog_42">
+        <attvalues>
+          <attvalue for="0" value="20" />
+          <attvalue for="1" value="361" />
+          <attvalue for="2" value="10.948075923002579" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_43" label="fog_43">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="429" />
+          <attvalue for="2" value="19.963673213228567" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_44" label="fog_44">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="118" />
+          <attvalue for="2" value="96.90002034727834" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_45" label="fog_45">
+        <attvalues>
+          <attvalue for="0" value="20" />
+          <attvalue for="1" value="533" />
+          <attvalue for="2" value="57.77485338830221" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_46" label="fog_46">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="114" />
+          <attvalue for="2" value="60.31247191847036" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_47" label="fog_47">
+        <attvalues>
+          <attvalue for="0" value="22" />
+          <attvalue for="1" value="913" />
+          <attvalue for="2" value="82.69622155999397" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_48" label="fog_48">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="973" />
+          <attvalue for="2" value="41.82281130230991" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_49" label="fog_49">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="781" />
+          <attvalue for="2" value="81.55568797262985" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_50" label="fog_50">
+        <attvalues>
+          <attvalue for="0" value="22" />
+          <attvalue for="1" value="465" />
+          <attvalue for="2" value="51.25958735077141" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_51" label="fog_51">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="771" />
+          <attvalue for="2" value="24.657743113181475" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_52" label="fog_52">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="319" />
+          <attvalue for="2" value="1.895085945170708" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_53" label="fog_53">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="619" />
+          <attvalue for="2" value="27.122227046770426" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_54" label="fog_54">
+        <attvalues>
+          <attvalue for="0" value="24" />
+          <attvalue for="1" value="755" />
+          <attvalue for="2" value="13.18752474249356" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_55" label="fog_55">
+        <attvalues>
+          <attvalue for="0" value="18" />
+          <attvalue for="1" value="606" />
+          <attvalue for="2" value="46.80699214455383" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_56" label="fog_56">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="962" />
+          <attvalue for="2" value="84.69948853764033" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_57" label="fog_57">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="738" />
+          <attvalue for="2" value="4.88132418725909" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_58" label="fog_58">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="298" />
+          <attvalue for="2" value="89.9974955644029" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_59" label="fog_59">
+        <attvalues>
+          <attvalue for="0" value="22" />
+          <attvalue for="1" value="924" />
+          <attvalue for="2" value="25.427546481858982" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_60" label="fog_60">
+        <attvalues>
+          <attvalue for="0" value="11" />
+          <attvalue for="1" value="829" />
+          <attvalue for="2" value="59.68630911225029" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_61" label="fog_61">
+        <attvalues>
+          <attvalue for="0" value="10" />
+          <attvalue for="1" value="553" />
+          <attvalue for="2" value="93.73119366972509" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_62" label="fog_62">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="901" />
+          <attvalue for="2" value="38.07511576061017" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_63" label="fog_63">
+        <attvalues>
+          <attvalue for="0" value="10" />
+          <attvalue for="1" value="931" />
+          <attvalue for="2" value="35.63061555015498" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_64" label="fog_64">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="731" />
+          <attvalue for="2" value="84.87931626196615" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_65" label="fog_65">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="196" />
+          <attvalue for="2" value="78.17977421059379" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_66" label="fog_66">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="396" />
+          <attvalue for="2" value="55.373460059762444" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_67" label="fog_67">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="405" />
+          <attvalue for="2" value="42.861151972521895" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_68" label="fog_68">
+        <attvalues>
+          <attvalue for="0" value="22" />
+          <attvalue for="1" value="330" />
+          <attvalue for="2" value="94.34993788212954" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_69" label="fog_69">
+        <attvalues>
+          <attvalue for="0" value="15" />
+          <attvalue for="1" value="877" />
+          <attvalue for="2" value="59.63808064478916" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_70" label="fog_70">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="521" />
+          <attvalue for="2" value="58.02258039952377" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_71" label="fog_71">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="641" />
+          <attvalue for="2" value="36.470656504229616" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_72" label="fog_72">
+        <attvalues>
+          <attvalue for="0" value="18" />
+          <attvalue for="1" value="960" />
+          <attvalue for="2" value="84.2369598804736" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_73" label="fog_73">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="531" />
+          <attvalue for="2" value="90.11429498281987" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_74" label="fog_74">
+        <attvalues>
+          <attvalue for="0" value="12" />
+          <attvalue for="1" value="194" />
+          <attvalue for="2" value="1.6982070912483482" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_75" label="fog_75">
+        <attvalues>
+          <attvalue for="0" value="18" />
+          <attvalue for="1" value="886" />
+          <attvalue for="2" value="77.16984387150605" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_76" label="fog_76">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="803" />
+          <attvalue for="2" value="92.12480884235474" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_77" label="fog_77">
+        <attvalues>
+          <attvalue for="0" value="20" />
+          <attvalue for="1" value="423" />
+          <attvalue for="2" value="31.28624412001212" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_78" label="fog_78">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="552" />
+          <attvalue for="2" value="50.37011428127068" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_79" label="fog_79">
+        <attvalues>
+          <attvalue for="0" value="16" />
+          <attvalue for="1" value="354" />
+          <attvalue for="2" value="53.69158294651044" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_80" label="fog_80">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="775" />
+          <attvalue for="2" value="84.04082808254117" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_81" label="fog_81">
+        <attvalues>
+          <attvalue for="0" value="16" />
+          <attvalue for="1" value="881" />
+          <attvalue for="2" value="58.40928876695688" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_82" label="fog_82">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="872" />
+          <attvalue for="2" value="14.212723675166135" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_83" label="fog_83">
+        <attvalues>
+          <attvalue for="0" value="14" />
+          <attvalue for="1" value="297" />
+          <attvalue for="2" value="18.419562043657432" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_84" label="fog_84">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="257" />
+          <attvalue for="2" value="93.83431913757879" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_85" label="fog_85">
+        <attvalues>
+          <attvalue for="0" value="16" />
+          <attvalue for="1" value="552" />
+          <attvalue for="2" value="57.08470077177421" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_86" label="fog_86">
+        <attvalues>
+          <attvalue for="0" value="18" />
+          <attvalue for="1" value="544" />
+          <attvalue for="2" value="50.15014832287573" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_87" label="fog_87">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="360" />
+          <attvalue for="2" value="27.004161592918418" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_88" label="fog_88">
+        <attvalues>
+          <attvalue for="0" value="24" />
+          <attvalue for="1" value="164" />
+          <attvalue for="2" value="37.48143499114007" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_89" label="fog_89">
+        <attvalues>
+          <attvalue for="0" value="23" />
+          <attvalue for="1" value="543" />
+          <attvalue for="2" value="43.46743709083533" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_90" label="fog_90">
+        <attvalues>
+          <attvalue for="0" value="15" />
+          <attvalue for="1" value="459" />
+          <attvalue for="2" value="44.8604263023006" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_91" label="fog_91">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="659" />
+          <attvalue for="2" value="80.48578832882096" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_92" label="fog_92">
+        <attvalues>
+          <attvalue for="0" value="15" />
+          <attvalue for="1" value="199" />
+          <attvalue for="2" value="68.93480426230566" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_93" label="fog_93">
+        <attvalues>
+          <attvalue for="0" value="16" />
+          <attvalue for="1" value="336" />
+          <attvalue for="2" value="75.30917911999084" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_94" label="fog_94">
+        <attvalues>
+          <attvalue for="0" value="13" />
+          <attvalue for="1" value="771" />
+          <attvalue for="2" value="72.8018760923155" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="fog_95" label="fog_95">
+        <attvalues>
+          <attvalue for="0" value="19" />
+          <attvalue for="1" value="707" />
+          <attvalue for="2" value="62.589766743816796" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_96" label="fog_96">
+        <attvalues>
+          <attvalue for="0" value="21" />
+          <attvalue for="1" value="429" />
+          <attvalue for="2" value="33.63726142087209" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_97" label="fog_97">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="445" />
+          <attvalue for="2" value="3.330590219788398" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_98" label="fog_98">
+        <attvalues>
+          <attvalue for="0" value="16" />
+          <attvalue for="1" value="808" />
+          <attvalue for="2" value="64.585067383065" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="fog_node" />
+        </attvalues>
+      </node>
+      <node id="fog_99" label="fog_99">
+        <attvalues>
+          <attvalue for="0" value="17" />
+          <attvalue for="1" value="449" />
+          <attvalue for="2" value="72.91523696776676" />
+          <attvalue for="3" value="fog" />
+          <attvalue for="4" value="FG" />
+        </attvalues>
+      </node>
+      <node id="cloud_0" label="cloud_0">
+        <attvalues>
+          <attvalue for="0" value="200000" />
+          <attvalue for="1" value="100000" />
+          <attvalue for="2" value="200" />
+          <attvalue for="3" value="cloud" />
+          <attvalue for="4" value="cloud_server" />
+        </attvalues>
+      </node>
+      <node id="cloud_1" label="cloud_1">
+        <attvalues>
+          <attvalue for="0" value="200000" />
+          <attvalue for="1" value="100000" />
+          <attvalue for="2" value="200" />
+          <attvalue for="3" value="cloud" />
+          <attvalue for="4" value="cloud_server" />
+        </attvalues>
+      </node>
+      <node id="cloud_2" label="cloud_2">
+        <attvalues>
+          <attvalue for="0" value="200000" />
+          <attvalue for="1" value="100000" />
+          <attvalue for="2" value="200" />
+          <attvalue for="3" value="cloud" />
+          <attvalue for="4" value="cloud_server" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="fog_0" target="fog_1" id="0">
+        <attvalues>
+          <attvalue for="5" value="54447742" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_2" id="1">
+        <attvalues>
+          <attvalue for="5" value="38365173" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_3" id="2">
+        <attvalues>
+          <attvalue for="5" value="34813795" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_5" id="3">
+        <attvalues>
+          <attvalue for="5" value="23893036" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_7" id="4">
+        <attvalues>
+          <attvalue for="5" value="54184590" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_9" id="5">
+        <attvalues>
+          <attvalue for="5" value="55370585" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_10" id="6">
+        <attvalues>
+          <attvalue for="5" value="18719232" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_11" id="7">
+        <attvalues>
+          <attvalue for="5" value="53545502" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_13" id="8">
+        <attvalues>
+          <attvalue for="5" value="23133436" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_14" id="9">
+        <attvalues>
+          <attvalue for="5" value="54732567" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_17" id="10">
+        <attvalues>
+          <attvalue for="5" value="10257603" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_18" id="11">
+        <attvalues>
+          <attvalue for="5" value="32285921" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_19" id="12">
+        <attvalues>
+          <attvalue for="5" value="53528364" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_20" id="13">
+        <attvalues>
+          <attvalue for="5" value="19397924" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_22" id="14">
+        <attvalues>
+          <attvalue for="5" value="57820389" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_23" id="15">
+        <attvalues>
+          <attvalue for="5" value="43404504" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_25" id="16">
+        <attvalues>
+          <attvalue for="5" value="26812064" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_28" id="17">
+        <attvalues>
+          <attvalue for="5" value="14747010" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_32" id="18">
+        <attvalues>
+          <attvalue for="5" value="55778933" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_36" id="19">
+        <attvalues>
+          <attvalue for="5" value="25899802" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_38" id="20">
+        <attvalues>
+          <attvalue for="5" value="32848147" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_44" id="21">
+        <attvalues>
+          <attvalue for="5" value="19643786" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_45" id="22">
+        <attvalues>
+          <attvalue for="5" value="21840163" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_47" id="23">
+        <attvalues>
+          <attvalue for="5" value="38709895" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_50" id="24">
+        <attvalues>
+          <attvalue for="5" value="31403066" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_57" id="25">
+        <attvalues>
+          <attvalue for="5" value="31647973" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_60" id="26">
+        <attvalues>
+          <attvalue for="5" value="15394744" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_61" id="27">
+        <attvalues>
+          <attvalue for="5" value="17536228" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_68" id="28">
+        <attvalues>
+          <attvalue for="5" value="48163209" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_71" id="29">
+        <attvalues>
+          <attvalue for="5" value="22315474" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_77" id="30">
+        <attvalues>
+          <attvalue for="5" value="53366817" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_78" id="31">
+        <attvalues>
+          <attvalue for="5" value="43962935" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_86" id="32">
+        <attvalues>
+          <attvalue for="5" value="19818823" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_88" id="33">
+        <attvalues>
+          <attvalue for="5" value="20886296" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_91" id="34">
+        <attvalues>
+          <attvalue for="5" value="20562407" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="fog_98" id="35">
+        <attvalues>
+          <attvalue for="5" value="12755443" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_0" target="cloud_2" id="36">
+        <attvalues>
+          <attvalue for="5" value="120000000" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_3" id="37">
+        <attvalues>
+          <attvalue for="5" value="26259760" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_4" id="38">
+        <attvalues>
+          <attvalue for="5" value="49573619" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_6" id="39">
+        <attvalues>
+          <attvalue for="5" value="16191697" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_7" id="40">
+        <attvalues>
+          <attvalue for="5" value="22679803" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_8" id="41">
+        <attvalues>
+          <attvalue for="5" value="11145448" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_15" id="42">
+        <attvalues>
+          <attvalue for="5" value="18296405" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_17" id="43">
+        <attvalues>
+          <attvalue for="5" value="33452361" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_21" id="44">
+        <attvalues>
+          <attvalue for="5" value="9869365" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_27" id="45">
+        <attvalues>
+          <attvalue for="5" value="51859631" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_28" id="46">
+        <attvalues>
+          <attvalue for="5" value="25462040" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_43" id="47">
+        <attvalues>
+          <attvalue for="5" value="50188340" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_45" id="48">
+        <attvalues>
+          <attvalue for="5" value="6721277" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_49" id="49">
+        <attvalues>
+          <attvalue for="5" value="40211054" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_65" id="50">
+        <attvalues>
+          <attvalue for="5" value="51514656" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_67" id="51">
+        <attvalues>
+          <attvalue for="5" value="59164783" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_75" id="52">
+        <attvalues>
+          <attvalue for="5" value="32592137" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_78" id="53">
+        <attvalues>
+          <attvalue for="5" value="49294969" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_97" id="54">
+        <attvalues>
+          <attvalue for="5" value="34652044" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="fog_99" id="55">
+        <attvalues>
+          <attvalue for="5" value="29634302" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_1" target="cloud_2" id="56">
+        <attvalues>
+          <attvalue for="5" value="120000000" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_2" target="fog_4" id="57">
+        <attvalues>
+          <attvalue for="5" value="44758150" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_2" target="fog_16" id="58">
+        <attvalues>
+          <attvalue for="5" value="14413737" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_2" target="fog_41" id="59">
+        <attvalues>
+          <attvalue for="5" value="45948456" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_2" target="fog_57" id="60">
+        <attvalues>
+          <attvalue for="5" value="35900682" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_2" target="fog_79" id="61">
+        <attvalues>
+          <attvalue for="5" value="10400219" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_3" target="fog_8" id="62">
+        <attvalues>
+          <attvalue for="5" value="46893973" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_5" id="63">
+        <attvalues>
+          <attvalue for="5" value="39649907" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_6" id="64">
+        <attvalues>
+          <attvalue for="5" value="41864425" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_12" id="65">
+        <attvalues>
+          <attvalue for="5" value="14365116" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_13" id="66">
+        <attvalues>
+          <attvalue for="5" value="45276071" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_15" id="67">
+        <attvalues>
+          <attvalue for="5" value="53086243" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_16" id="68">
+        <attvalues>
+          <attvalue for="5" value="36690191" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_18" id="69">
+        <attvalues>
+          <attvalue for="5" value="46370156" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_19" id="70">
+        <attvalues>
+          <attvalue for="5" value="51645868" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_23" id="71">
+        <attvalues>
+          <attvalue for="5" value="22024316" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_30" id="72">
+        <attvalues>
+          <attvalue for="5" value="7320487" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_36" id="73">
+        <attvalues>
+          <attvalue for="5" value="47686968" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_40" id="74">
+        <attvalues>
+          <attvalue for="5" value="39936204" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_53" id="75">
+        <attvalues>
+          <attvalue for="5" value="16042198" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_62" id="76">
+        <attvalues>
+          <attvalue for="5" value="46107670" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_64" id="77">
+        <attvalues>
+          <attvalue for="5" value="51832920" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_69" id="78">
+        <attvalues>
+          <attvalue for="5" value="14117474" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_74" id="79">
+        <attvalues>
+          <attvalue for="5" value="9073297" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_80" id="80">
+        <attvalues>
+          <attvalue for="5" value="26900397" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_83" id="81">
+        <attvalues>
+          <attvalue for="5" value="6601820" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_86" id="82">
+        <attvalues>
+          <attvalue for="5" value="12598732" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_87" id="83">
+        <attvalues>
+          <attvalue for="5" value="15587397" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_93" id="84">
+        <attvalues>
+          <attvalue for="5" value="48954534" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="fog_99" id="85">
+        <attvalues>
+          <attvalue for="5" value="49457326" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_4" target="cloud_1" id="86">
+        <attvalues>
+          <attvalue for="5" value="120000000" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_11" id="87">
+        <attvalues>
+          <attvalue for="5" value="30234148" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_12" id="88">
+        <attvalues>
+          <attvalue for="5" value="38105323" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_22" id="89">
+        <attvalues>
+          <attvalue for="5" value="26795971" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_24" id="90">
+        <attvalues>
+          <attvalue for="5" value="24826127" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_30" id="91">
+        <attvalues>
+          <attvalue for="5" value="46003696" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_33" id="92">
+        <attvalues>
+          <attvalue for="5" value="7065554" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_34" id="93">
+        <attvalues>
+          <attvalue for="5" value="21687432" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_39" id="94">
+        <attvalues>
+          <attvalue for="5" value="25790830" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_42" id="95">
+        <attvalues>
+          <attvalue for="5" value="25729959" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_62" id="96">
+        <attvalues>
+          <attvalue for="5" value="51455267" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="fog_67" id="97">
+        <attvalues>
+          <attvalue for="5" value="12870958" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_5" target="cloud_1" id="98">
+        <attvalues>
+          <attvalue for="5" value="120000000" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_9" id="99">
+        <attvalues>
+          <attvalue for="5" value="47627277" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_29" id="100">
+        <attvalues>
+          <attvalue for="5" value="39097512" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_31" id="101">
+        <attvalues>
+          <attvalue for="5" value="29954721" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_37" id="102">
+        <attvalues>
+          <attvalue for="5" value="52136543" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_50" id="103">
+        <attvalues>
+          <attvalue for="5" value="32544936" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_55" id="104">
+        <attvalues>
+          <attvalue for="5" value="11696110" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_60" id="105">
+        <attvalues>
+          <attvalue for="5" value="29326947" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="fog_82" id="106">
+        <attvalues>
+          <attvalue for="5" value="42229975" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_6" target="cloud_0" id="107">
+        <attvalues>
+          <attvalue for="5" value="120000000" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_7" target="fog_59" id="108">
+        <attvalues>
+          <attvalue for="5" value="23415164" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_8" target="fog_10" id="109">
+        <attvalues>
+          <attvalue for="5" value="14669663" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_8" target="fog_14" id="110">
+        <attvalues>
+          <attvalue for="5" value="49548270" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_8" target="fog_20" id="111">
+        <attvalues>
+          <attvalue for="5" value="54106684" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_8" target="fog_26" id="112">
+        <attvalues>
+          <attvalue for="5" value="39580945" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_10" target="fog_32" id="113">
+        <attvalues>
+          <attvalue for="5" value="24013606" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_10" target="fog_51" id="114">
+        <attvalues>
+          <attvalue for="5" value="27921678" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_10" target="fog_58" id="115">
+        <attvalues>
+          <attvalue for="5" value="46359375" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_10" target="fog_85" id="116">
+        <attvalues>
+          <attvalue for="5" value="55269088" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_10" target="fog_95" id="117">
+        <attvalues>
+          <attvalue for="5" value="54841824" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_11" target="fog_61" id="118">
+        <attvalues>
+          <attvalue for="5" value="17365276" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_12" target="fog_37" id="119">
+        <attvalues>
+          <attvalue for="5" value="58278031" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_12" target="fog_84" id="120">
+        <attvalues>
+          <attvalue for="5" value="42342360" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_13" target="fog_26" id="121">
+        <attvalues>
+          <attvalue for="5" value="30255004" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_13" target="fog_40" id="122">
+        <attvalues>
+          <attvalue for="5" value="32594979" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_15" target="fog_46" id="123">
+        <attvalues>
+          <attvalue for="5" value="14509912" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_15" target="fog_47" id="124">
+        <attvalues>
+          <attvalue for="5" value="51136820" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_15" target="fog_73" id="125">
+        <attvalues>
+          <attvalue for="5" value="21607205" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_16" target="fog_21" id="126">
+        <attvalues>
+          <attvalue for="5" value="9933944" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_16" target="fog_33" id="127">
+        <attvalues>
+          <attvalue for="5" value="18500959" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_16" target="fog_43" id="128">
+        <attvalues>
+          <attvalue for="5" value="40259311" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_16" target="fog_49" id="129">
+        <attvalues>
+          <attvalue for="5" value="28645184" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_16" target="fog_68" id="130">
+        <attvalues>
+          <attvalue for="5" value="12466295" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_16" target="fog_96" id="131">
+        <attvalues>
+          <attvalue for="5" value="52277205" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_17" target="fog_38" id="132">
+        <attvalues>
+          <attvalue for="5" value="11715169" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_17" target="fog_46" id="133">
+        <attvalues>
+          <attvalue for="5" value="46212086" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_17" target="fog_52" id="134">
+        <attvalues>
+          <attvalue for="5" value="52562972" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_18" target="fog_51" id="135">
+        <attvalues>
+          <attvalue for="5" value="14873170" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_18" target="fog_54" id="136">
+        <attvalues>
+          <attvalue for="5" value="28063459" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_19" target="fog_24" id="137">
+        <attvalues>
+          <attvalue for="5" value="55862023" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_21" target="fog_25" id="138">
+        <attvalues>
+          <attvalue for="5" value="44868702" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_21" target="fog_34" id="139">
+        <attvalues>
+          <attvalue for="5" value="34812169" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_21" target="fog_75" id="140">
+        <attvalues>
+          <attvalue for="5" value="7332674" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_22" target="fog_42" id="141">
+        <attvalues>
+          <attvalue for="5" value="36810043" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_22" target="fog_76" id="142">
+        <attvalues>
+          <attvalue for="5" value="58504978" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_24" target="fog_27" id="143">
+        <attvalues>
+          <attvalue for="5" value="31696321" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_24" target="fog_35" id="144">
+        <attvalues>
+          <attvalue for="5" value="9033852" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_24" target="fog_72" id="145">
+        <attvalues>
+          <attvalue for="5" value="51957967" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_25" target="fog_35" id="146">
+        <attvalues>
+          <attvalue for="5" value="44794492" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_26" target="fog_29" id="147">
+        <attvalues>
+          <attvalue for="5" value="59123253" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_26" target="fog_64" id="148">
+        <attvalues>
+          <attvalue for="5" value="17462975" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_26" target="fog_65" id="149">
+        <attvalues>
+          <attvalue for="5" value="46006895" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_26" target="fog_84" id="150">
+        <attvalues>
+          <attvalue for="5" value="11892046" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_26" target="fog_91" id="151">
+        <attvalues>
+          <attvalue for="5" value="15499207" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_27" target="fog_44" id="152">
+        <attvalues>
+          <attvalue for="5" value="7175405" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_27" target="fog_56" id="153">
+        <attvalues>
+          <attvalue for="5" value="32435407" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_27" target="fog_90" id="154">
+        <attvalues>
+          <attvalue for="5" value="13188517" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_27" target="fog_92" id="155">
+        <attvalues>
+          <attvalue for="5" value="44047208" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_29" target="fog_31" id="156">
+        <attvalues>
+          <attvalue for="5" value="14305712" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_30" target="fog_98" id="157">
+        <attvalues>
+          <attvalue for="5" value="59940675" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_31" target="fog_39" id="158">
+        <attvalues>
+          <attvalue for="5" value="42358136" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_31" target="fog_55" id="159">
+        <attvalues>
+          <attvalue for="5" value="51993039" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_31" target="fog_56" id="160">
+        <attvalues>
+          <attvalue for="5" value="12804477" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_32" target="fog_81" id="161">
+        <attvalues>
+          <attvalue for="5" value="17273282" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_32" target="fog_82" id="162">
+        <attvalues>
+          <attvalue for="5" value="6255858" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_33" target="fog_48" id="163">
+        <attvalues>
+          <attvalue for="5" value="23369332" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_33" target="fog_59" id="164">
+        <attvalues>
+          <attvalue for="5" value="31920971" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_33" target="fog_97" id="165">
+        <attvalues>
+          <attvalue for="5" value="16252817" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_34" target="fog_58" id="166">
+        <attvalues>
+          <attvalue for="5" value="26786724" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_35" target="fog_71" id="167">
+        <attvalues>
+          <attvalue for="5" value="11801435" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_35" target="fog_89" id="168">
+        <attvalues>
+          <attvalue for="5" value="23258915" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_37" target="fog_41" id="169">
+        <attvalues>
+          <attvalue for="5" value="25834691" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_37" target="fog_53" id="170">
+        <attvalues>
+          <attvalue for="5" value="10923104" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_37" target="fog_81" id="171">
+        <attvalues>
+          <attvalue for="5" value="51729814" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_39" target="fog_70" id="172">
+        <attvalues>
+          <attvalue for="5" value="49762191" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_41" target="fog_93" id="173">
+        <attvalues>
+          <attvalue for="5" value="57716316" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_43" target="fog_48" id="174">
+        <attvalues>
+          <attvalue for="5" value="39917514" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_43" target="fog_80" id="175">
+        <attvalues>
+          <attvalue for="5" value="40105755" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_45" target="fog_63" id="176">
+        <attvalues>
+          <attvalue for="5" value="39150194" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_45" target="fog_69" id="177">
+        <attvalues>
+          <attvalue for="5" value="39220148" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_49" target="fog_52" id="178">
+        <attvalues>
+          <attvalue for="5" value="59193158" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_49" target="fog_54" id="179">
+        <attvalues>
+          <attvalue for="5" value="57457690" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_49" target="fog_76" id="180">
+        <attvalues>
+          <attvalue for="5" value="36472075" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_49" target="fog_95" id="181">
+        <attvalues>
+          <attvalue for="5" value="13734649" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_50" target="fog_66" id="182">
+        <attvalues>
+          <attvalue for="5" value="8972466" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_50" target="fog_72" id="183">
+        <attvalues>
+          <attvalue for="5" value="54228190" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_50" target="fog_88" id="184">
+        <attvalues>
+          <attvalue for="5" value="26538477" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_52" target="fog_63" id="185">
+        <attvalues>
+          <attvalue for="5" value="59471190" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_57" target="fog_70" id="186">
+        <attvalues>
+          <attvalue for="5" value="18660727" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_57" target="fog_85" id="187">
+        <attvalues>
+          <attvalue for="5" value="9534679" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_57" target="fog_94" id="188">
+        <attvalues>
+          <attvalue for="5" value="47028961" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_59" target="fog_96" id="189">
+        <attvalues>
+          <attvalue for="5" value="25432485" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_61" target="fog_66" id="190">
+        <attvalues>
+          <attvalue for="5" value="26796880" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_62" target="fog_87" id="191">
+        <attvalues>
+          <attvalue for="5" value="56058696" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_64" target="fog_79" id="192">
+        <attvalues>
+          <attvalue for="5" value="55953730" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_66" target="fog_73" id="193">
+        <attvalues>
+          <attvalue for="5" value="13807297" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_66" target="fog_74" id="194">
+        <attvalues>
+          <attvalue for="5" value="18612448" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_69" target="fog_77" id="195">
+        <attvalues>
+          <attvalue for="5" value="27780074" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_69" target="fog_89" id="196">
+        <attvalues>
+          <attvalue for="5" value="51097296" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_74" target="fog_83" id="197">
+        <attvalues>
+          <attvalue for="5" value="12750147" />
+          <attvalue for="6" value="5" />
+        </attvalues>
+      </edge>
+      <edge source="fog_79" target="fog_90" id="198">
+        <attvalues>
+          <attvalue for="5" value="21577698" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+      <edge source="fog_79" target="fog_92" id="199">
+        <attvalues>
+          <attvalue for="5" value="41226942" />
+          <attvalue for="6" value="4" />
+        </attvalues>
+      </edge>
+      <edge source="fog_87" target="fog_94" id="200">
+        <attvalues>
+          <attvalue for="5" value="37340371" />
+          <attvalue for="6" value="3" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
