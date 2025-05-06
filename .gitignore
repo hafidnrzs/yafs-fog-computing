@@ -6,4 +6,4 @@
 !.vscode/settings.json
 !.vscode/launch.json
 build/
-src/yafs.egg-info/
+src/yafs_fog_computing.egg-info/
