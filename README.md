@@ -1,3 +1,25 @@
+## How to Install
+
+1. Clone repository
+   ```
+   git clone https://github.com/hafidnrzs/yafs-fog-computing.git
+   ```
+2. Navigasi ke folder
+   ```
+   cd yafs-fog-computing
+   ```
+3. Install dependency
+   ```
+   pip install -e .
+   ```
+4. Jalankan kode program
+   ```
+   cd fspcn-paper
+   python main.py
+   ```
+
+Hasil akan tersimpan pada folder results yang terdiri dari file `graph_barabasi_albert_2.gexf` dan visualisasi `topology_visualization.png`
+
 ## Citation
 
 This project uses [YAFS (Yet Another Fog Simulator)](https://github.com/acsicuib/YAFS).  
