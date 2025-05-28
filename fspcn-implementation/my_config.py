@@ -9,7 +9,7 @@ class MyConfig:
         self.result_folder = "result"
         self.data_folder = "data"
 
-        try:
-            os.stat(self.result_folder)
-        except:
-            os.mkdir(self.result_folder)
+        # try:
+        #     os.stat(self.result_folder)
+        # except:
+        #     os.mkdir(self.result_folder)
