@@ -5,7 +5,7 @@ import random
 
 
 class ExperimentConfiguration:
-    def __init__(self, config):
+    def __init__(self, _config):
         self.TOTAL_APP_NUMBER = 1
         self.CLOUD_CAPACITY = 9999999999999999
         self.CLOUD_SPEED = 9999
@@ -26,7 +26,7 @@ class ExperimentConfiguration:
         self.FUNC_APP_DEADLINE = "(random.random()*4)"
         self.FUNC_USER_REQ_RAT = "random.random()"
 
-        self.config = config
+        self.config = _config
 
     def user_generation(self):
         # USER GENERATION
@@ -34,8 +34,8 @@ class ExperimentConfiguration:
         user_json = {}
 
         self.my_users = list()
-
         self.app_requests = list()
+
         for i in range(0, self.TOTAL_APP_NUMBER):
             user_request_list = set()
             prob_of_requested = eval(self.FUNC_REQUEST_PROB)
@@ -53,7 +53,7 @@ class ExperimentConfiguration:
                     at_least_one_allocated = True
 
             if not at_least_one_allocated:
-                j = random.randint(0, len(self.gateway_devices))
+                j = random.randint(0, len(self.gateway_devices) - 1)
                 my_one_user = {}
                 my_one_user["app"] = str(i)
                 my_one_user["message"] = "M.USER.APP." + str(i)
@@ -74,7 +74,7 @@ class ExperimentConfiguration:
         # APPLICATION GENERATION
 
         self.number_of_services = 0
-        self.app = list()
+        self.apps = list()
         self.app_deadlines = {}
         self.app_resources = list()
         self.app_source_services = list()
@@ -98,11 +98,11 @@ class ExperimentConfiguration:
             if self.config.graphic_terminal:
                 nx.draw(APP, labels=my_labels)
 
-            edge_lists = list()
+            _edge_lists = list()
 
             for m in APP.edges:
-                edge_lists.append(m)
-            for m in edge_lists:
+                _edge_lists.append(m)
+            for m in _edge_lists:
                 APP.remove_edge(m[0], m[1])
                 APP.add_edge(m[1], m[0])
 
@@ -163,7 +163,7 @@ class ExperimentConfiguration:
                     my_edge["d"] = str(i) + "_" + str(n)
                     my_edge["instructions"] = eval(self.FUNC_SERVICE_INSTR)
                     total_MIPS = total_MIPS + my_edge["instructions"]
-                    my_edge["bytes"] = eval(self.func_SERVICEMESSAGESIZE)
+                    my_edge["bytes"] = eval(self.FUNC_SERVICE_MESSAGE_SIZE)
                     my_app["message"].append(my_edge)
                     self.app_source_messages.append(my_edge)
                     if self.config.verbose_log:
@@ -180,49 +180,49 @@ class ExperimentConfiguration:
 
                 my_app["module"].append(my_node)
 
-                for n in APP.edges:
-                    my_edge = {}
-                    my_edge["id"] = edge_number
-                    edge_number = edge_number + 1
-                    my_edge["name"] = str(i) + "_(" + str(n[0]) + "-" + str(n[1]) + ")"
-                    my_edge["s"] = str(i) + "_" + str(n[0])
-                    my_edge["d"] = str(i) + "_" + str(n[1])
-                    my_edge["instructions"] = eval(self.FUNC_SERVICE_INSTR)
-                    total_MIPS = total_MIPS + my_edge["instructions"]
-                    my_edge["bytes"] = eval(self.FUNC_SERVICE_MESSAGE_SIZE)
-                    my_app["message"].append(my_edge)
-                    dest_node = n[1]
-                    for o in APP.edges:
-                        if o[0] == dest_node:
+            for n in APP.edges:
+                my_edge = {}
+                my_edge["id"] = edge_number
+                edge_number = edge_number + 1
+                my_edge["name"] = str(i) + "_(" + str(n[0]) + "-" + str(n[1]) + ")"
+                my_edge["s"] = str(i) + "_" + str(n[0])
+                my_edge["d"] = str(i) + "_" + str(n[1])
+                my_edge["instructions"] = eval(self.FUNC_SERVICE_INSTR)
+                total_MIPS = total_MIPS + my_edge["instructions"]
+                my_edge["bytes"] = eval(self.FUNC_SERVICE_MESSAGE_SIZE)
+                my_app["message"].append(my_edge)
+                dest_node = n[1]
+                for o in APP.edges:
+                    if o[0] == dest_node:
+                        my_transmissions = {}
+                        my_transmissions["module"] = str(i) + "_" + str(n[1])
+                        my_transmissions["message_in"] = (
+                            str(i) + "_(" + str(n[0]) + "-" + str(n[1]) + ")"
+                        )
+                        my_transmissions["message_out"] = (
+                            str(i) + "_(" + str(o[0]) + "-" + str(o[1]) + ")"
+                        )
+                        my_app["transmission"].append(my_transmissions)
+
+            for n in APP.nodes:
+                outgoing_edges = False
+                for m in APP.edges:
+                    if m[0] == n:
+                        outgoing_edges = True
+                        break
+                if not outgoing_edges:
+                    for m in APP.edges:
+                        if m[1] == n:
                             my_transmissions = {}
-                            my_transmissions["module"] = str(i) + "_" + str(n[1])
+                            my_transmissions["module"] = str(i) + "_" + str(n)
                             my_transmissions["message_in"] = (
-                                str(i) + "_(" + str(n[0]) + "-" + str(n[1]) + ")"
-                            )
-                            my_transmissions["message_out"] = (
-                                str(i) + "_(" + str(o[0]) + "-" + str(o[1]) + ")"
+                                str(i) + "_(" + str(m[0]) + "-" + str(m[1]) + ")"
                             )
                             my_app["transmission"].append(my_transmissions)
 
-                for n in APP.nodes:
-                    outgoing_edges = False
-                    for m in APP.edges:
-                        if m[0] == n:
-                            outgoing_edges = True
-                            break
-                    if not outgoing_edges:
-                        for m in APP.edges:
-                            if m[1] == n:
-                                my_transmissions = {}
-                                my_transmissions["module"] = str(i) + "_" + str(n)
-                                my_transmissions["message_in"] = (
-                                    str(i) + "_(" + str(m[0]) + "-" + str(m[1]) + ")"
-                                )
-                                my_app["transmission"].append(my_transmissions)
+            self.app_total_MIPS.append(total_MIPS)
 
-                self.app_total_MIPS.append(total_MIPS)
-
-                app_json.append(my_app)
+            app_json.append(my_app)
 
         file = open(self.config.data_folder + "/appDefinition.json", "w")
         file.write(json.dumps(app_json))
@@ -319,6 +319,57 @@ class ExperimentConfiguration:
         file.close()
 
     def load_configuration(self, my_configuration):
+        # Configuration for the IEEE IoT journal experiment
+        if my_configuration == "iotjournal":
+            # CLOUD
+            self.CLOUD_CAPACITY = 9999999999999999  # MB RAM
+            self.CLOUD_SPEED = 10000  # INSTR x MS
+            self.CLOUD_BW = 125000  # BYTES / MS --> 1000 Mbits/s
+            self.CLOUD_PR = 1  # MS
+
+            # NETWORK
+            self.PERCENTAGE_GATEWAYS = 0.25
+            self.FUNC_PROPAGATION_TIME = "random.randint(5,5)"  # MS
+            self.FUNC_BANDWIDTH = "random.randint(75000,75000)"  # BYTES / MS
+            self.FUNC_NETWORK_GENERATION = "nx.barabasi_albert_graph(n=100, m=2)"  # algorithm for the generation of the network topology
+            self.FUNC_NODE_RESOURECES = "random.randint(10,25)"  # MB RAM   random distribution for the resources of the fog devices
+            self.FUNC_NODE_SPEED = "random.randint(100,1000)"  # INTS / MS   random distribution for the speed of the fog devices
+
+            # APP and SERVICES
+            self.TOTAL_APP_NUMBER = 20
+            self.FUNC_APP_GENERATION = "nx.gn_graph(random.randint(2,10))"  # algorithm for the generation of the random applications
+            self.FUNC_SERVICE_INSTR = "random.randint(20000,60000)"  # INSTR --> Taking into account node speed this gives us between 200 and 600 MS
+            self.FUNC_SERVICE_MESSAGE_SIZE = "random.randint(1500000,4500000)"  # BYTES and taking into account net bandwidth gives us between 20 and 60 MS
+            self.FUNC_SERVICE_RESOURCES = "random.randint(1,6)"  # MB of RAM consumed by the service, taking into account node_resources and appgeneration, we have approximately 1 app per node or about 10 services
+            self.FUNC_APP_DEADLINE = "random.randint(2600,6600)"  # MS
+
+            # USERS and IoT DEVICES
+            self.FUNC_REQUEST_PROB = "random.random()/4"  # App popularity. Threshold that determines the probability that a device has requests associated with an app. The threshold is for each app
+            self.FUNC_USER_REQ_RAT = "random.randint(200,1000)"  # MS
+
+            self.my_deadlines = [
+                487203.22,
+                487203.22,
+                487203.22,
+                474.51,
+                302.05,
+                831.04,
+                793.26,
+                1582.21,
+                2214.64,
+                374046.40,
+                420476.14,
+                2464.69,
+                97999.14,
+                2159.73,
+                915.16,
+                1659.97,
+                1059.97,
+                322898.56,
+                1817.51,
+                406034.73,
+            ]
+
         # Configuration for FSPCN paper 1
         if my_configuration == "firstattempt":
             # CLOUD
@@ -347,7 +398,7 @@ class ExperimentConfiguration:
             self.FUNC_REQUEST_PROB = "random.random()/4"  # App popularity. Threshold that determines the probability that a device has requests associated with an app. The threshold is for each app
             self.FUNC_USER_REQ_RAT = "random.randint(200,1000)"  # MS
 
-            self.myDeadlines = [
+            self.my_deadlines = [
                 487203.22,
                 487203.22,
                 487203.22,
