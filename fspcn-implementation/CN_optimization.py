@@ -231,7 +231,7 @@ class CNoptimization:
 
         allAlloc["initialAllocation"] = myAllocationList
 
-        file = open(self.cnf.data_folder + "/allocDefinition.json", "w")
+        file = open(self.cnf.data_folder + "/allocDefinitionCN.json", "w")
         file.write(json.dumps(allAlloc))
         file.close()
 
