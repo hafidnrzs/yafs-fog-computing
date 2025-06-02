@@ -13,5 +13,7 @@ setup(
         "tqdm",
         "matplotlib",
         "pulp",
+        "shapely",
+        "pyproj",
     ],
 )
