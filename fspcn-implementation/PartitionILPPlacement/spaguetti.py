@@ -22,7 +22,7 @@ import time
 # ****************************************************************************************************
 random.seed(8)
 verbose_log = False
-ILPoptimization = False
+ILPoptimization = True
 generatePlots = True
 graphicTerminal = False
 

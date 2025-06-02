@@ -93,11 +93,11 @@ def getProcessFromThatNode(sim, node_to_remove):
 """
 It controls the elimination of a node
 """
+idxFControl = 0
 
 
 def failureControl(sim, filelog, ids):
-    global idxFControl  # WARNING! This global variable has to be reset in each simulation test
-
+    global idxFControl
     nodes = list(sim.topology.G.nodes())
     if len(nodes) > 1:
         try:
@@ -181,32 +181,21 @@ def main(simulated_time, experimento, ilpPath, it):
     s = Sim(
         t,
         default_results_path=experimento
-        + "Results_RND_FAIL_%s_%i_%i" % (ilpPath, stop_time, it),
+        + "Results_%s_%i_%i" % (ilpPath, stop_time, it),
     )
 
     """
     Failure process
     """
-    time_shift = 10000
+    # time_shift = 10000
     # distribution = deterministicDistributionStartPoint(name="Deterministic", time=time_shift,start=10000)
-    distribution = deterministicDistributionStartPoint(
-        name="Deterministic", time=time_shift, start=1
-    )
-    failurefilelog = open(experimento + "Failure_%s_%i.csv" % (ilpPath, stop_time), "w")
-    failurefilelog.write("node, module, time\n")
+    # failurefilelog = open(experimento+"Failure_%s_%i.csv" % (ilpPath,stop_time),"w")
+    # failurefilelog.write("node, module, time\n")
     # idCloud = t.find_IDs({"type": "CLOUD"})[0] #[0] -> In this study there is only one CLOUD DEVICE
     # centrality = np.load(pathExperimento+"centrality.npy")
-    # s.deploy_monitor("Failure Generation", failureControl, distribution,sim=s,filelog=failurefilelog,ids=centrality)
-
-    randomValues = np.load(pathExperimento + "random.npy")
-    s.deploy_monitor(
-        "Failure Generation",
-        failureControl,
-        distribution,
-        sim=s,
-        filelog=failurefilelog,
-        ids=randomValues,
-    )
+    # randomValues = np.load(pathExperimento+"random.npy")
+    # # s.deploy_monitor("Failure Generation", failureControl, distribution,sim=s,filelog=failurefilelog,ids=centrality)
+    # s.deploy_monitor("Failure Generation", failureControl, distribution,sim=s,filelog=failurefilelog,ids=randomValues)
 
     # For each deployment the user - population have to contain only its specific sources
     for aName in apps.keys():
@@ -228,14 +217,13 @@ def main(simulated_time, experimento, ilpPath, it):
     # print "Values"
     # print selectorPath.cache.values()
 
-    failurefilelog.close()
+    # failurefilelog.close()
 
     # #CHECKS
     # print s.topology.G.nodes
     # s.print_debug_assignaments()
 
 
-idxFControl = 0
 if __name__ == "__main__":
     # import logging.config
     import os
@@ -243,22 +231,18 @@ if __name__ == "__main__":
     pathExperimento = "exp_rev/"
     # pathExperimento = "/home/uib/src/YAFS/src/examples/PartitionILPPlacement/exp_rev/"
 
-    timeSimulation = 10000
     print(os.getcwd())
     # logging.config.fileConfig(os.getcwd()+'/logging.ini')
     for i in range(2):
-        # for i in  [0]:
         start_time = time.time()
         random.seed(i)
         np.random.seed(i)
-        idxFControl = 0
         # 1000000
         print("Running Partition")
         main(simulated_time=1000000, experimento=pathExperimento, ilpPath="", it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
         start_time = time.time()
         print("Running: ILP ")
-        idxFControl = 0
         main(simulated_time=1000000, experimento=pathExperimento, ilpPath="ILP", it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
 

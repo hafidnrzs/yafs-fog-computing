@@ -15,5 +15,7 @@ setup(
         "pulp",
         "shapely",
         "pyproj",
+        "scipy",
+        "smopy",
     ],
 )
