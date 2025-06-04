@@ -101,8 +101,6 @@ class GACommunity:
 
 # Contoh penggunaan:
 if __name__ == "__main__":
-    # Buat graph contoh
-    G = nx.erdos_renyi_graph(10, 0.3)
     # Tambahkan atribut node (RAM, STO, IPT)
     for n in G.nodes:
         G.nodes[n]['RAM'] = random.randint(1, 8)
