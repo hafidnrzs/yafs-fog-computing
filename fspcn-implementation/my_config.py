@@ -3,9 +3,9 @@ import os
 
 class MyConfig:
     def __init__(self):
-        self.graphic_terminal = True
-        self.verbose_log = False
-        self.my_configuration = "iotjournal"
+        self.graphic_terminal = False
+        self.verbose_log = True
+        self.my_configuration = "fspcn"
         self.result_folder = "result"
         self.data_folder = "data"
 

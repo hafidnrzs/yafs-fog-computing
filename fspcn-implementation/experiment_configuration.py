@@ -19,6 +19,7 @@ class ExperimentConfiguration:
         self.FUNC_NETWORK_GENERATION = "nx.barbell_graph(5, 1)"
         self.FUNC_NODE_RESOURECES = "random.randint(1,1)"
         self.FUNC_NODE_SPEED = "random.randint(100,1000)"
+        self.FUNC_NODE_TB = "random.uniform(10,10)"
         self.FUNC_APP_GENERATION = "nx.gn_graph(random.randint(2,3))"
         self.FUNC_REQUEST_PROB = "random.random()/4"
         self.FUNC_REQUEST_PROB = "1.0"
@@ -167,7 +168,8 @@ class ExperimentConfiguration:
                     my_app["message"].append(my_edge)
                     self.app_source_messages.append(my_edge)
                     if self.config.verbose_log:
-                        print("ADD MESSAGE SOURCE")
+                        # print("ADD MESSAGE SOURCE")
+                        pass
                     for o in APP.edges:
                         if o[0] == source:
                             my_transmissions = {}
@@ -232,18 +234,21 @@ class ExperimentConfiguration:
         # NETWORK GENERATION
 
         self.G = eval(self.FUNC_NETWORK_GENERATION)
-        # G = nx.barbell_graph(5, 1)
         if self.config.graphic_terminal:
             nx.draw(self.G)
 
+        # Declare list dari semua perangkat (fog node)
         self.devices = list()
 
+        # Assign value ke node (IPT, RAM, TB) dan edge (PR, BW)
         self.node_resources = {}
         self.node_free_resources = {}
         self.node_speed = {}
+        self.node_storage = {}
         for i in self.G.nodes:
             self.node_resources[i] = eval(self.FUNC_NODE_RESOURECES)
             self.node_speed[i] = eval(self.FUNC_NODE_SPEED)
+            self.node_storage[i] = eval(self.FUNC_NODE_TB)
 
         for e in self.G.edges:
             self.G[e[0]][e[1]]["PR"] = eval(self.FUNC_PROPAGATION_TIME)
@@ -257,6 +262,7 @@ class ExperimentConfiguration:
             my_node["id"] = i
             my_node["RAM"] = self.node_resources[i]
             my_node["IPT"] = self.node_speed[i]
+            my_node["TB"] = self.node_storage[i]
             self.devices.append(my_node)
 
         my_edges = list()
@@ -266,33 +272,45 @@ class ExperimentConfiguration:
             my_link["d"] = e[1]
             my_link["PR"] = self.G[e[0]][e[1]]["PR"]
             my_link["BW"] = self.G[e[0]][e[1]]["BW"]
-
             my_edges.append(my_link)
 
+        # Mencari nilai betweenness centrality dari setiap node
         centrality_values_no_ordered = nx.betweenness_centrality(
             self.G, weight="weight"
         )
+
+        # Urutkan betweeness centrality dari yang tertinggi
         centrality_values = sorted(
             centrality_values_no_ordered.items(),
             key=operator.itemgetter(1),
             reverse=True,
         )
+        # centrality_values = [[key_node, centrality_value], ...]
 
         self.gateway_devices = set()
         self.cloud_gateway_devices = set()
 
+        # ambil nilai betweeness centrality tertinggi
         highest_centrality = centrality_values[0][1]
 
+        # TODO - Atur Cloud-Fog-Gateway menjadi 5% alih-alih hanya ambil betweeness centrality tertinggi
+        # cek device mana yang punya nilai centrality tertinggi
+        # lalu tambahkan device tersebut ke cloud_gateway_devices
         for device in centrality_values:
             if device[1] == highest_centrality:
                 self.cloud_gateway_devices.add(device[0])
 
-        initial_idx = int(
-            (1 - self.PERCENTAGE_GATEWAYS) * len(self.G.nodes)
-        )  # End index for the X percent nodes
+        # mencari indeks awal untuk gateway device
+        initial_idx = int((1 - self.PERCENTAGE_GATEWAYS) * len(self.G.nodes))
 
+        # karena centrality sudah diurutkan dari tertinggi ke terendah
+        # maka indeks awal (misal 75) sampai jumlah node (misal 100)
+        # adalah node dengan centrality terendah yang akan menjadi gateway device
         for id_dev in range(initial_idx, len(self.G.nodes)):
             self.gateway_devices.add(centrality_values[id_dev][0])
+
+        # menambahkan 1 node sebagai cloud
+        print(f"sebelum: {self.devices}")
 
         self.cloud_id = len(self.G.nodes)
         my_node = {}
@@ -302,6 +320,7 @@ class ExperimentConfiguration:
         my_node["type"] = "CLOUD"
         self.devices.append(my_node)
 
+        # menambahkan edge dari cloud gateway
         for cloud_gateway in self.cloud_gateway_devices:
             my_link = {}
             my_link["s"] = cloud_gateway
@@ -311,6 +330,7 @@ class ExperimentConfiguration:
 
             my_edges.append(my_link)
 
+        # convert ke JSON
         net_json["entity"] = self.devices
         net_json["link"] = my_edges
 
@@ -370,8 +390,8 @@ class ExperimentConfiguration:
                 406034.73,
             ]
 
-        # Configuration for FSPCN paper 1
-        if my_configuration == "firstattempt":
+        # Configuration for FSPCN paper
+        if my_configuration == "fspcn":
             # CLOUD
             self.CLOUD_CAPACITY = 9999999999999999  # MB RAM
             self.CLOUD_SPEED = 10000  # INSTR x MS
@@ -380,14 +400,16 @@ class ExperimentConfiguration:
 
             # NETWORK
             self.PERCENTAGE_GATEWAYS = 0.25
-            self.FUNC_PROPAGATION_TIME = "random.randint(5,5)"  # MS
-            self.FUNC_BANDWIDTH = "random.randint(75000,75000)"  # BYTES / MS
+            self.FUNC_PROPAGATION_TIME = "random.randint(3,5)"  # MS
+            # TODO - Cek ulang satuan dari bandwidth (bit/s atau bytes/ms)
+            self.FUNC_BANDWIDTH = "random.randint(6*10**6,6*10**7)"  # BIT / S
             self.FUNC_NETWORK_GENERATION = "nx.barabasi_albert_graph(n=100, m=2)"  # algorithm for the generation of the network topology
             self.FUNC_NODE_RESOURECES = "random.randint(10,25)"  # MB RAM   random distribution for the resources of the fog devices
             self.FUNC_NODE_SPEED = "random.randint(100,1000)"  # INTS / MS   random distribution for the speed of the fog devices
+            self.FUNC_NODE_TB = "random.uniform(0.2,100)"  # TB  random distribution for storage of the fog devices
 
             # APP and SERVICES
-            self.TOTAL_APP_NUMBER = 20
+            self.TOTAL_APP_NUMBER = 10
             self.FUNC_APP_GENERATION = "nx.gn_graph(random.randint(2,10))"  # algorithm for the generation of the random applications
             self.FUNC_SERVICE_INSTR = "random.randint(20000,60000)"  # INSTR --> Taking into account node speed this gives us between 200 and 600 MS
             self.FUNC_SERVICE_MESSAGE_SIZE = "random.randint(1500000,4500000)"  # BYTES and taking into account net bandwidth gives us between 20 and 60 MS

@@ -8,11 +8,11 @@ import ILP_optimization
 # Initialization and set up
 #
 random.seed(8)
-verbose_log = False
 generate_plots = True
 
-ILPOptimization = True
-CommunityOptimization = True
+ILPOptimization = False
+CommunityOptimization = False
+GAOptimization = True
 
 config = my_config.MyConfig()
 ec = experiment_configuration.ExperimentConfiguration(config)
@@ -31,9 +31,16 @@ if CommunityOptimization:
     service_to_device_placement_matrix_CN = cno_.solve()
 
 #
-# ILP OPtimization
+# ILP Optimization
 #
 
 if ILPOptimization:
     ilp_ = ILP_optimization.ILP(ec, config)
     service_to_device_placement_matrix_ILP = ilp_.solve()
+
+#
+# GA Optimization
+#
+if GAOptimization:
+    # TODO - Implementasi Genetic Algorithm dari paper FSPCN
+    pass
