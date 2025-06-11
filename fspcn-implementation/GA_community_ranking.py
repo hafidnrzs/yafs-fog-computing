@@ -1,5 +1,5 @@
 # Algoritma 2 - community ranking
-# GA_community_ranking.py
+
 import networkx as nx
 import random # For example usage
 from typing import List, Dict, Set, Any, Union
