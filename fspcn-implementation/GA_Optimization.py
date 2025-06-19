@@ -2,6 +2,7 @@ import time
 import json
 import networkx as nx
 from experiment_configuration import ExperimentConfiguration
+from GA_community import GACommunity  
 
 class GAOptimization:
     def __init__(self, expconf, cnf, num_communities=3):
@@ -12,23 +13,52 @@ class GAOptimization:
         self.fog_nodes = [n for n, d in self.G.nodes(data=True) if d.get('level', 'fog') == 'fog']
 
     def run_ga_community_detection(self):
-        # Simple random assignment as placeholder for actual GA
-        # Replace this with your actual GA logic if sudah ada
-        import random
-        communities = [[] for _ in range(self.num_communities)]
-        for idx, node in enumerate(self.fog_nodes):
-            communities[idx % self.num_communities].append(node)
+        # --- Step 1: GA cari komunitas tiap node ---
+        ga = GACommunity(
+            self.G,
+            num_communities=self.num_communities,
+            generations=50,  # atau sesuai kebutuhan
+            population_size=30,
+            mutation_rate=0.1,
+            omega_1=1.0, omega_2=1.0, omega_3=1.0,
+            w_RAM=1.0, w_TB=1.0, w_IPT=1.0
+        )
+        best_chromosome, _ = ga.run()
+        # best_chromosome: list of community assignment, index = node index
+        # Map node ke komunitas
+        node_list = list(self.fog_nodes)
+        comm_map = {}
+        for idx, comm_id in enumerate(best_chromosome):
+            comm_map.setdefault(comm_id, []).append(node_list[idx])
+        communities = list(comm_map.values())
         return communities
+
+    def community_ranking(self, communities):
+        # Kombinasi resource: RAM, IPT, STO (bobot bisa kamu atur)
+        def total_resource(comm):
+            ram = sum(self.G.nodes[n].get('RAM', 0) for n in comm)
+            ipt = sum(self.G.nodes[n].get('IPT', 0) for n in comm)
+            sto = sum(self.G.nodes[n].get('STO', 0) for n in comm)
+            # Contoh bobot: RAM 0.4, IPT 0.4, STO 0.2
+            return 0.4 * ram + 0.4 * ipt + 0.2 * sto
+        ranked = sorted(communities, key=total_resource, reverse=True)
+        return ranked
 
     def solve(self, verbose=True):
         t = time.time()
-        print("=== GA Optimization ===")
+        print("=== GA Optimization (FSPCN) ===")
 
-        # 1. Jalankan GA untuk deteksi komunitas
+        # 1. GA cari komunitas tiap node
         communities = self.run_ga_community_detection()
         print(f"GA found {len(communities)} communities.")
 
-        # 2. Siapkan struktur penempatan
+        # 2. Community ranking (kombinasi resource)
+        ranked_communities = self.community_ranking(communities)
+        if verbose:
+            for i, comm in enumerate(ranked_communities):
+                print(f"Community {i+1}: nodes={comm}")
+
+        # 3. Application placement
         num_services = self.expconf.number_of_services
         num_devices = len(self.G.nodes)
         service2DevicePlacementMatrixGA = [
@@ -42,10 +72,10 @@ class GAOptimization:
         allAlloc = {}
         myAllocationList = []
 
-        # 3. Placement service ke device berdasarkan komunitas hasil GA
         for idServ in range(num_services):
             placed = False
-            for comm in communities:
+            # Prioritaskan komunitas ranking atas
+            for comm in ranked_communities:
                 for devId in comm:
                     if nodeBussyResourcesGA[devId] + self.expconf.service_resources[idServ] <= self.expconf.node_resources[devId]:
                         service2DevicePlacementMatrixGA[idServ][devId] = 1
@@ -78,10 +108,12 @@ class GAOptimization:
 
         allAlloc["initialAllocation"] = myAllocationList
 
-        # 5. Simpan ke file JSON
-        with open(self.cnf.data_folder + "/data/allocDefinitionGA.json", "w") as file:
+        # 5. Simpan ke appAllocation.json
+        output_path = self.cnf.data_folder + "/fspcn-implementation/dataGA/allocDefinitionGAcls.json"
+        with open(output_path, "w") as file:
             file.write(json.dumps(allAlloc, indent=2))
 
+        print("Allocation saved to", output_path)
         print(str(time.time() - t) + " seconds for GA-based optimization")
 
         return service2DevicePlacementMatrixGA

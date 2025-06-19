@@ -1,0 +1,664 @@
+{
+  "initialAllocation": [
+    {
+      "app": "0",
+      "module_name": "0_0",
+      "id_resource": 0
+    },
+    {
+      "app": "0",
+      "module_name": "0_1",
+      "id_resource": 0
+    },
+    {
+      "app": "0",
+      "module_name": "0_2",
+      "id_resource": 0
+    },
+    {
+      "app": "0",
+      "module_name": "0_3",
+      "id_resource": 3
+    },
+    {
+      "app": "0",
+      "module_name": "0_4",
+      "id_resource": 6
+    },
+    {
+      "app": "1",
+      "module_name": "1_5",
+      "id_resource": 3
+    },
+    {
+      "app": "1",
+      "module_name": "1_6",
+      "id_resource": 0
+    },
+    {
+      "app": "2",
+      "module_name": "2_7",
+      "id_resource": 0
+    },
+    {
+      "app": "2",
+      "module_name": "2_8",
+      "id_resource": 6
+    },
+    {
+      "app": "2",
+      "module_name": "2_9",
+      "id_resource": 6
+    },
+    {
+      "app": "2",
+      "module_name": "2_10",
+      "id_resource": 6
+    },
+    {
+      "app": "3",
+      "module_name": "3_11",
+      "id_resource": 6
+    },
+    {
+      "app": "3",
+      "module_name": "3_12",
+      "id_resource": 9
+    },
+    {
+      "app": "3",
+      "module_name": "3_13",
+      "id_resource": 6
+    },
+    {
+      "app": "3",
+      "module_name": "3_14",
+      "id_resource": 9
+    },
+    {
+      "app": "4",
+      "module_name": "4_15",
+      "id_resource": 9
+    },
+    {
+      "app": "4",
+      "module_name": "4_16",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_17",
+      "id_resource": 9
+    },
+    {
+      "app": "5",
+      "module_name": "5_18",
+      "id_resource": 9
+    },
+    {
+      "app": "5",
+      "module_name": "5_19",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_20",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_21",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_22",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_23",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_24",
+      "id_resource": 12
+    },
+    {
+      "app": "5",
+      "module_name": "5_25",
+      "id_resource": 15
+    },
+    {
+      "app": "5",
+      "module_name": "5_26",
+      "id_resource": 15
+    },
+    {
+      "app": "6",
+      "module_name": "6_27",
+      "id_resource": 15
+    },
+    {
+      "app": "6",
+      "module_name": "6_28",
+      "id_resource": 15
+    },
+    {
+      "app": "6",
+      "module_name": "6_29",
+      "id_resource": 15
+    },
+    {
+      "app": "6",
+      "module_name": "6_30",
+      "id_resource": 15
+    },
+    {
+      "app": "6",
+      "module_name": "6_31",
+      "id_resource": 18
+    },
+    {
+      "app": "6",
+      "module_name": "6_32",
+      "id_resource": 18
+    },
+    {
+      "app": "6",
+      "module_name": "6_33",
+      "id_resource": 18
+    },
+    {
+      "app": "6",
+      "module_name": "6_34",
+      "id_resource": 18
+    },
+    {
+      "app": "6",
+      "module_name": "6_35",
+      "id_resource": 18
+    },
+    {
+      "app": "7",
+      "module_name": "7_36",
+      "id_resource": 18
+    },
+    {
+      "app": "7",
+      "module_name": "7_37",
+      "id_resource": 18
+    },
+    {
+      "app": "7",
+      "module_name": "7_38",
+      "id_resource": 21
+    },
+    {
+      "app": "7",
+      "module_name": "7_39",
+      "id_resource": 21
+    },
+    {
+      "app": "7",
+      "module_name": "7_40",
+      "id_resource": 21
+    },
+    {
+      "app": "7",
+      "module_name": "7_41",
+      "id_resource": 21
+    },
+    {
+      "app": "7",
+      "module_name": "7_42",
+      "id_resource": 21
+    },
+    {
+      "app": "7",
+      "module_name": "7_43",
+      "id_resource": 24
+    },
+    {
+      "app": "7",
+      "module_name": "7_44",
+      "id_resource": 24
+    },
+    {
+      "app": "8",
+      "module_name": "8_45",
+      "id_resource": 24
+    },
+    {
+      "app": "8",
+      "module_name": "8_46",
+      "id_resource": 24
+    },
+    {
+      "app": "8",
+      "module_name": "8_47",
+      "id_resource": 24
+    },
+    {
+      "app": "8",
+      "module_name": "8_48",
+      "id_resource": 27
+    },
+    {
+      "app": "8",
+      "module_name": "8_49",
+      "id_resource": 27
+    },
+    {
+      "app": "8",
+      "module_name": "8_50",
+      "id_resource": 27
+    },
+    {
+      "app": "8",
+      "module_name": "8_51",
+      "id_resource": 27
+    },
+    {
+      "app": "8",
+      "module_name": "8_52",
+      "id_resource": 21
+    },
+    {
+      "app": "8",
+      "module_name": "8_53",
+      "id_resource": 27
+    },
+    {
+      "app": "9",
+      "module_name": "9_54",
+      "id_resource": 27
+    },
+    {
+      "app": "9",
+      "module_name": "9_55",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_56",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_57",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_58",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_59",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_60",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_61",
+      "id_resource": 30
+    },
+    {
+      "app": "9",
+      "module_name": "9_62",
+      "id_resource": 33
+    },
+    {
+      "app": "10",
+      "module_name": "10_63",
+      "id_resource": 33
+    },
+    {
+      "app": "10",
+      "module_name": "10_64",
+      "id_resource": 33
+    },
+    {
+      "app": "10",
+      "module_name": "10_65",
+      "id_resource": 36
+    },
+    {
+      "app": "10",
+      "module_name": "10_66",
+      "id_resource": 36
+    },
+    {
+      "app": "10",
+      "module_name": "10_67",
+      "id_resource": 36
+    },
+    {
+      "app": "11",
+      "module_name": "11_68",
+      "id_resource": 36
+    },
+    {
+      "app": "11",
+      "module_name": "11_69",
+      "id_resource": 36
+    },
+    {
+      "app": "11",
+      "module_name": "11_70",
+      "id_resource": 39
+    },
+    {
+      "app": "11",
+      "module_name": "11_71",
+      "id_resource": 36
+    },
+    {
+      "app": "11",
+      "module_name": "11_72",
+      "id_resource": 39
+    },
+    {
+      "app": "11",
+      "module_name": "11_73",
+      "id_resource": 39
+    },
+    {
+      "app": "11",
+      "module_name": "11_74",
+      "id_resource": 42
+    },
+    {
+      "app": "11",
+      "module_name": "11_75",
+      "id_resource": 42
+    },
+    {
+      "app": "11",
+      "module_name": "11_76",
+      "id_resource": 42
+    },
+    {
+      "app": "12",
+      "module_name": "12_77",
+      "id_resource": 39
+    },
+    {
+      "app": "12",
+      "module_name": "12_78",
+      "id_resource": 45
+    },
+    {
+      "app": "12",
+      "module_name": "12_79",
+      "id_resource": 39
+    },
+    {
+      "app": "12",
+      "module_name": "12_80",
+      "id_resource": 42
+    },
+    {
+      "app": "12",
+      "module_name": "12_81",
+      "id_resource": 42
+    },
+    {
+      "app": "13",
+      "module_name": "13_82",
+      "id_resource": 45
+    },
+    {
+      "app": "13",
+      "module_name": "13_83",
+      "id_resource": 39
+    },
+    {
+      "app": "13",
+      "module_name": "13_84",
+      "id_resource": 45
+    },
+    {
+      "app": "13",
+      "module_name": "13_85",
+      "id_resource": 45
+    },
+    {
+      "app": "13",
+      "module_name": "13_86",
+      "id_resource": 48
+    },
+    {
+      "app": "13",
+      "module_name": "13_87",
+      "id_resource": 45
+    },
+    {
+      "app": "13",
+      "module_name": "13_88",
+      "id_resource": 48
+    },
+    {
+      "app": "13",
+      "module_name": "13_89",
+      "id_resource": 48
+    },
+    {
+      "app": "13",
+      "module_name": "13_90",
+      "id_resource": 51
+    },
+    {
+      "app": "14",
+      "module_name": "14_91",
+      "id_resource": 48
+    },
+    {
+      "app": "14",
+      "module_name": "14_92",
+      "id_resource": 51
+    },
+    {
+      "app": "14",
+      "module_name": "14_93",
+      "id_resource": 51
+    },
+    {
+      "app": "14",
+      "module_name": "14_94",
+      "id_resource": 54
+    },
+    {
+      "app": "14",
+      "module_name": "14_95",
+      "id_resource": 54
+    },
+    {
+      "app": "14",
+      "module_name": "14_96",
+      "id_resource": 54
+    },
+    {
+      "app": "14",
+      "module_name": "14_97",
+      "id_resource": 54
+    },
+    {
+      "app": "14",
+      "module_name": "14_98",
+      "id_resource": 54
+    },
+    {
+      "app": "14",
+      "module_name": "14_99",
+      "id_resource": 57
+    },
+    {
+      "app": "14",
+      "module_name": "14_100",
+      "id_resource": 57
+    },
+    {
+      "app": "15",
+      "module_name": "15_101",
+      "id_resource": 60
+    },
+    {
+      "app": "15",
+      "module_name": "15_102",
+      "id_resource": 57
+    },
+    {
+      "app": "15",
+      "module_name": "15_103",
+      "id_resource": 51
+    },
+    {
+      "app": "15",
+      "module_name": "15_104",
+      "id_resource": 60
+    },
+    {
+      "app": "16",
+      "module_name": "16_105",
+      "id_resource": 60
+    },
+    {
+      "app": "16",
+      "module_name": "16_106",
+      "id_resource": 42
+    },
+    {
+      "app": "16",
+      "module_name": "16_107",
+      "id_resource": 60
+    },
+    {
+      "app": "16",
+      "module_name": "16_108",
+      "id_resource": 60
+    },
+    {
+      "app": "16",
+      "module_name": "16_109",
+      "id_resource": 63
+    },
+    {
+      "app": "16",
+      "module_name": "16_110",
+      "id_resource": 63
+    },
+    {
+      "app": "16",
+      "module_name": "16_111",
+      "id_resource": 45
+    },
+    {
+      "app": "16",
+      "module_name": "16_112",
+      "id_resource": 66
+    },
+    {
+      "app": "17",
+      "module_name": "17_113",
+      "id_resource": 60
+    },
+    {
+      "app": "17",
+      "module_name": "17_114",
+      "id_resource": 66
+    },
+    {
+      "app": "17",
+      "module_name": "17_115",
+      "id_resource": 63
+    },
+    {
+      "app": "18",
+      "module_name": "18_116",
+      "id_resource": 66
+    },
+    {
+      "app": "18",
+      "module_name": "18_117",
+      "id_resource": 66
+    },
+    {
+      "app": "18",
+      "module_name": "18_118",
+      "id_resource": 66
+    },
+    {
+      "app": "18",
+      "module_name": "18_119",
+      "id_resource": 69
+    },
+    {
+      "app": "18",
+      "module_name": "18_120",
+      "id_resource": 66
+    },
+    {
+      "app": "18",
+      "module_name": "18_121",
+      "id_resource": 69
+    },
+    {
+      "app": "18",
+      "module_name": "18_122",
+      "id_resource": 54
+    },
+    {
+      "app": "18",
+      "module_name": "18_123",
+      "id_resource": 69
+    },
+    {
+      "app": "18",
+      "module_name": "18_124",
+      "id_resource": 63
+    },
+    {
+      "app": "18",
+      "module_name": "18_125",
+      "id_resource": 66
+    },
+    {
+      "app": "19",
+      "module_name": "19_126",
+      "id_resource": 69
+    },
+    {
+      "app": "19",
+      "module_name": "19_127",
+      "id_resource": 69
+    },
+    {
+      "app": "19",
+      "module_name": "19_128",
+      "id_resource": 72
+    },
+    {
+      "app": "19",
+      "module_name": "19_129",
+      "id_resource": 72
+    },
+    {
+      "app": "19",
+      "module_name": "19_130",
+      "id_resource": 72
+    },
+    {
+      "app": "19",
+      "module_name": "19_131",
+      "id_resource": 72
+    }
+  ]
+}
