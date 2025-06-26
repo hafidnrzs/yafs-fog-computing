@@ -32,13 +32,17 @@ class ExperimentConfiguration:
     def user_generation(self):
         # USER GENERATION
 
+        # variabel untuk menyimpan objek yang akan disimpan dalam JSON
         user_json = {}
 
+        # variabel temporary untuk menyimpan daftar user dan app request
         self.my_users = list()
         self.app_requests = list()
 
+        # loop sebanyak jumlah aplikasi yang ditentukan pada konfigurasi
         for i in range(0, self.TOTAL_APP_NUMBER):
             user_request_list = set()
+            # probabilitas yang menentukan threshold (nilai batas) dari app popularity
             prob_of_requested = eval(self.FUNC_REQUEST_PROB)
             at_least_one_allocated = False
 
@@ -53,6 +57,7 @@ class ExperimentConfiguration:
                     self.my_users.append(my_one_user)
                     at_least_one_allocated = True
 
+            # jika dalam loop pertama tidak menempatkan satu pun workload pada aplikasi
             if not at_least_one_allocated:
                 j = random.randint(0, len(self.gateway_devices) - 1)
                 my_one_user = {}
