@@ -30,22 +30,45 @@ class ExperimentConfiguration:
         self.config = _config
 
     def user_generation(self):
-        # USER GENERATION
+        """
+        Menghasilkan permintaan pengguna untuk aplikasi dan menulis konfigurasi ke file JSON.
 
-        # variabel untuk menyimpan objek yang akan disimpan dalam JSON
+        Metode ini melakukan operasi berikut:
+        1. Membuat sekumpulan permintaan pengguna untuk setiap aplikasi berdasarkan probabilitas permintaan yang dikonfigurasi
+        2. Memastikan bahwa setiap aplikasi memiliki setidaknya satu permintaan pengguna
+        3. Menetapkan tingkat permintaan (lambda) ke setiap pengguna berdasarkan fungsi yang dikonfigurasi
+        4. Menyimpan informasi pengguna dan perangkat gateway terkait
+        5. Menulis konfigurasi pengguna ke 'usersDefinition.json' di folder data
+
+        Permintaan pengguna yang dihasilkan mencakup:
+        - ID Aplikasi
+        - Tipe pesan
+        - ID Sumber Daya (perangkat gateway)
+        - Tingkat permintaan (lambda)
+
+        Returns:
+            None
+
+        Efek samping:
+            - Mengisi self.my_users dengan konfigurasi pengguna
+            - Mengisi self.app_requests dengan set perangkat gateway untuk setiap aplikasi
+            - Membuat file JSON dengan konfigurasi pengguna
+        """
+
+        # Initialize variabel untuk menyimpan data
         user_json = {}
 
-        # variabel temporary untuk menyimpan daftar user dan app request
         self.my_users = list()
         self.app_requests = list()
 
-        # loop sebanyak jumlah aplikasi yang ditentukan pada konfigurasi
+        # Iterasi sebanyak jumlah aplikasi yang ditentukan pada konfigurasi
         for i in range(0, self.TOTAL_APP_NUMBER):
             user_request_list = set()
-            # probabilitas yang menentukan threshold (nilai batas) dari app popularity
             prob_of_requested = eval(self.FUNC_REQUEST_PROB)
             at_least_one_allocated = False
 
+            # Iterasi semua gateway device
+            # Dengan probabilitas acak, tentukan kalau gateway tersebut request aplikasi i
             for j in self.gateway_devices:
                 if random.random() < prob_of_requested:
                     my_one_user = {}
@@ -57,7 +80,7 @@ class ExperimentConfiguration:
                     self.my_users.append(my_one_user)
                     at_least_one_allocated = True
 
-            # jika dalam loop pertama tidak menempatkan satu pun workload pada aplikasi
+            # Memastikan setidaknya satu workload (user request) dialokasikan ke setiap aplikasi
             if not at_least_one_allocated:
                 j = random.randint(0, len(self.gateway_devices) - 1)
                 my_one_user = {}
@@ -70,6 +93,7 @@ class ExperimentConfiguration:
 
             self.app_requests.append(user_request_list)
 
+        # Export data workload request aplikasi (untuk Population) ke file JSON
         user_json["sources"] = self.my_users
 
         file = open(self.config.data_folder + "/usersDefinition.json", "w")
@@ -77,8 +101,32 @@ class ExperimentConfiguration:
         file.close()
 
     def app_generation(self):
-        # APPLICATION GENERATION
+        """
+        Menghasilkan aplikasi, layanan, dan sumber daya terkait berdasarkan parameter konfigurasi.
 
+        Fungsi ini:
+        - Membuat aplikasi berdasarkan fungsi generator yang dikonfigurasi
+        - Menetapkan sumber daya ke layanan
+        - Membangun konektivitas antar layanan
+        - Mengatur aliran pesan antar layanan
+        - Menghitung total MIPS (Million Instructions Per Second) untuk setiap aplikasi
+        - Mendefinisikan batas waktu aplikasi
+        - Menyimpan definisi aplikasi yang dihasilkan ke file JSON
+
+        Fungsi ini mengisi beberapa variabel instance:
+        - number_of_services: Jumlah total layanan di semua aplikasi
+        - apps: Daftar graf aplikasi
+        - app_deadlines: Dictionary yang memetakan ID aplikasi ke batas waktunya
+        - app_resources: Daftar kebutuhan sumber daya untuk setiap aplikasi
+        - app_source_services: Daftar ID layanan sumber untuk setiap aplikasi
+        - app_source_messages: Daftar pesan awal untuk setiap aplikasi
+        - app_total_MIPS: Daftar kebutuhan komputasi total untuk setiap aplikasi
+        - map_service_to_apps: Pemetaan layanan ke aplikasi mereka
+        - map_service_id_to_service_name: Pemetaan ID layanan ke nama mereka
+        - service_resources: Dictionary kebutuhan sumber daya untuk setiap layanan
+        """
+
+        # Inisialisasi variabel untuk menyimpan data
         self.number_of_services = 0
         self.apps = list()
         self.app_deadlines = {}
@@ -92,10 +140,12 @@ class ExperimentConfiguration:
         app_json = list()
         self.service_resources = {}
 
+        # Iterasi sebanyak jumlah aplikasi yang ditentukan pada konfigurasi
         for i in range(0, self.TOTAL_APP_NUMBER):
             my_app = {}
             APP = eval(self.FUNC_APP_GENERATION)
 
+            # Beri label graf aplikasi
             my_labels = {}
 
             for n in range(0, len(APP.nodes)):
@@ -104,6 +154,7 @@ class ExperimentConfiguration:
             if self.config.graphic_terminal:
                 nx.draw(APP, labels=my_labels)
 
+            # Reverse edge direction
             _edge_lists = list()
 
             for m in APP.edges:
@@ -115,6 +166,7 @@ class ExperimentConfiguration:
             if self.config.graphic_terminal:
                 nx.draw(APP, labels=my_labels)
 
+            # Relabel node ID, mulai dari number_of_services dan increment untuk tiap node
             mapping = dict(
                 zip(
                     APP.nodes(),
@@ -126,17 +178,23 @@ class ExperimentConfiguration:
             )
             APP = nx.relabel_nodes(APP, mapping)
 
+            # Update variabel jumlah total layanan
             self.number_of_services = self.number_of_services + len(APP.nodes)
             self.apps.append(APP)
+
+            # Alokasi sumber daya pada node (MB RAM)
             for j in APP.nodes:
                 self.service_resources[j] = eval(self.FUNC_SERVICE_RESOURCES)
             self.app_resources.append(self.service_resources)
 
+            # Topological analysis pada directed acyclic graph (DAG)
+            # mengurutkan dependency dulu sebelum layanan yang bergantung padanya
             topologic_order = list(nx.topological_sort(APP))
             source = topologic_order[0]
 
             self.app_source_services.append(source)
 
+            # Terapkan properti pada aplikasi (node dan edges)
             # app_deadlines[i]=eval(FUNC_APP_DEADLINE)
             self.app_deadlines[i] = self.my_deadlines[i]
             my_app["id"] = i
@@ -152,6 +210,7 @@ class ExperimentConfiguration:
 
             total_MIPS = 0
 
+            # Iterasi semua nodes dan terapkan properti (id, name, RAM, type="MODULE") ke "module"
             for n in APP.nodes:
                 self.map_service_to_apps.append(str(i))
                 self.map_service_id_to_service_name.append(str(i) + "_" + str(n))
@@ -160,6 +219,11 @@ class ExperimentConfiguration:
                 my_node["name"] = str(i) + "_" + str(n)
                 my_node["RAM"] = self.service_resources[n]
                 my_node["type"] = "MODULE"
+
+                # Jika module merupakan source/node pertama di aplikasi, maka:
+                # - Buat entry Message
+                # - Tetapkan kebutuhan sumber daya (CPU & Message size)
+                # - Terapkan "transmission" khusus untuk source
                 if source == n:
                     my_edge = {}
                     my_edge["id"] = edge_number
@@ -187,6 +251,7 @@ class ExperimentConfiguration:
 
                 my_app["module"].append(my_node)
 
+            # Iterasi semua edges dan terapkan properti ke "message"
             for n in APP.edges:
                 my_edge = {}
                 my_edge["id"] = edge_number
@@ -211,12 +276,14 @@ class ExperimentConfiguration:
                         )
                         my_app["transmission"].append(my_transmissions)
 
+            # Konfigurasi untuk "transmission": module apa, apa pesan masuk dan pesan keluarnya
             for n in APP.nodes:
                 outgoing_edges = False
                 for m in APP.edges:
                     if m[0] == n:
                         outgoing_edges = True
                         break
+                # Jika tidak ada outgoing edge atau node terakhir pada graf, maka atur ulang "transmission"
                 if not outgoing_edges:
                     for m in APP.edges:
                         if m[1] == n:
@@ -231,21 +298,57 @@ class ExperimentConfiguration:
 
             app_json.append(my_app)
 
+        # Export aplikasi yang dihasilkan ke file JSON
         file = open(self.config.data_folder + "/appDefinition.json", "w")
         file.write(json.dumps(app_json))
         file.close()
 
     def network_generation(self):
-        # NETWORK GENERATION
+        """
+        Menghasilkan topologi jaringan untuk simulasi fog computing dengan konektivitas cloud.
 
+        Metode ini membuat graf jaringan, menetapkan sumber daya ke node, menghitung betweenness
+        centrality untuk mengidentifikasi gateway device, dan mengekspor konfigurasi jaringan ke JSON.
+
+        Metode ini melakukan operasi berikut:
+        1. Menghasilkan graf jaringan menggunakan fungsi network generation yang dikonfigurasi
+        2. Menetapkan sumber daya komputasi (RAM, processing speed, storage) ke setiap node
+        3. Menetapkan properti jaringan (propagation time, bandwidth) ke setiap edge
+        4. Menghitung betweenness centrality untuk mengidentifikasi node yang paling sentral
+        5. Menentukan cloud gateway device berdasarkan nilai centrality tertinggi
+        6. Menentukan gateway device reguler berdasarkan persentase node dengan centrality terendah
+        7. Menambahkan cloud node dengan sumber daya berkapasitas tinggi
+        8. Membuat koneksi antara cloud gateway device dan cloud node
+        9. Mengekspor definisi jaringan lengkap ke file JSON
+
+        Attributes Modified:
+            G (networkx.Graph): Graf jaringan yang dihasilkan
+            devices (list): Daftar semua network device dengan propertinya
+            node_resources (dict): Alokasi RAM untuk setiap node
+            node_free_resources (dict): Sumber daya yang tersedia untuk setiap node
+            node_speed (dict): Kecepatan pemrosesan (IPT) untuk setiap node
+            node_storage (dict): Kapasitas storage (TB) untuk setiap node
+            gateway_devices (set): Set ID node yang ditentukan sebagai gateway device
+            cloud_gateway_devices (set): Set ID node dengan koneksi cloud langsung
+            cloud_id (int): Identifier unik untuk cloud node
+
+        Side Effects:
+            - Membuat visualisasi jaringan jika graphic_terminal diaktifkan
+            - Menulis konfigurasi jaringan ke file 'networkDefinition.json'
+            - Mencetak informasi device sebelum penambahan cloud node
+
+        Note:
+            Pemilihan cloud gateway saat ini hanya menggunakan node dengan centrality tertinggi.
+            Ada komentar TODO yang menunjukkan implementasi masa depan harus menggunakan 5% dari node
+            alih-alih hanya nilai centrality tertinggi.
+        """
         self.G = eval(self.FUNC_NETWORK_GENERATION)
         if self.config.graphic_terminal:
             nx.draw(self.G)
 
-        # Declare list dari semua perangkat (fog node)
         self.devices = list()
 
-        # Assign value ke node (IPT, RAM, TB) dan edge (PR, BW)
+        # Siapkan penerapan atribut ke node dan edge
         self.node_resources = {}
         self.node_free_resources = {}
         self.node_speed = {}
@@ -259,9 +362,9 @@ class ExperimentConfiguration:
             self.G[e[0]][e[1]]["PR"] = eval(self.FUNC_PROPAGATION_TIME)
             self.G[e[0]][e[1]]["BW"] = eval(self.FUNC_BANDWIDTH)
 
-        # JSON EXPORT
         net_json = {}
 
+        # Menetapkan sumber daya komputasi (RAM, instruction per time, storage) ke setiap node
         for i in self.G.nodes:
             my_node = {}
             my_node["id"] = i
@@ -270,6 +373,7 @@ class ExperimentConfiguration:
             my_node["TB"] = self.node_storage[i]
             self.devices.append(my_node)
 
+        # Menetapkan properti jaringan (propagation time, bandwidth) ke setiap edge
         my_edges = list()
         for e in self.G.edges:
             my_link = {}
@@ -279,7 +383,8 @@ class ExperimentConfiguration:
             my_link["BW"] = self.G[e[0]][e[1]]["BW"]
             my_edges.append(my_link)
 
-        # Mencari nilai betweenness centrality dari setiap node
+        # Menghitung nilai betweenness centrality dari setiap node untuk mengidentifikasi node paling sentral
+        # node penting yang banyak dilalui sebagai jalur
         centrality_values_no_ordered = nx.betweenness_centrality(
             self.G, weight="weight"
         )
@@ -292,18 +397,21 @@ class ExperimentConfiguration:
         )
         # centrality_values = [[key_node, centrality_value], ...]
 
+        # Menentukan cloud gateway device berdasarkan nilai centrality tertinggi
         self.gateway_devices = set()
         self.cloud_gateway_devices = set()
 
-        # ambil nilai betweeness centrality tertinggi
+        # Ambil nilai betweeness centrality tertinggi
         highest_centrality = centrality_values[0][1]
 
         # TODO - Atur Cloud-Fog-Gateway menjadi 5% alih-alih hanya ambil betweeness centrality tertinggi
-        # cek device mana yang punya nilai centrality tertinggi
-        # lalu tambahkan device tersebut ke cloud_gateway_devices
+        # - Cek device mana yang punya nilai centrality tertinggi
+        # - Lalu tambahkan device tersebut ke cloud_gateway_devices
         for device in centrality_values:
             if device[1] == highest_centrality:
                 self.cloud_gateway_devices.add(device[0])
+
+        # Menentukan gateway device berdasarkan persentase node dengan centrality terendah
 
         # mencari indeks awal untuk gateway device
         initial_idx = int((1 - self.PERCENTAGE_GATEWAYS) * len(self.G.nodes))
@@ -314,9 +422,7 @@ class ExperimentConfiguration:
         for id_dev in range(initial_idx, len(self.G.nodes)):
             self.gateway_devices.add(centrality_values[id_dev][0])
 
-        # menambahkan 1 node sebagai cloud
-        print(f"sebelum: {self.devices}")
-
+        # Menambahkan cloud node dengan sumber daya berkapasitas tinggi
         self.cloud_id = len(self.G.nodes)
         my_node = {}
         my_node["id"] = self.cloud_id
@@ -325,7 +431,7 @@ class ExperimentConfiguration:
         my_node["type"] = "CLOUD"
         self.devices.append(my_node)
 
-        # menambahkan edge dari cloud gateway
+        # Membuat koneksi antara cloud gateway device dan cloud node
         for cloud_gateway in self.cloud_gateway_devices:
             my_link = {}
             my_link["s"] = cloud_gateway
@@ -335,7 +441,7 @@ class ExperimentConfiguration:
 
             my_edges.append(my_link)
 
-        # convert ke JSON
+        # Export definisi jaringan lengkap ke file JSON
         net_json["entity"] = self.devices
         net_json["link"] = my_edges
 
