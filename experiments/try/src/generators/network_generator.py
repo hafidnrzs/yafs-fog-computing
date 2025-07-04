@@ -61,3 +61,35 @@ def generate_network():
         G.add_edge(node_id, cloud_id, PR=1, BW=1e9)
         
     return G
+
+def convert_network_to_json(network_graph):
+    """
+    Konversi graf NetworkX ke format JSON yang diharapkan oleh YAFS.
+    
+    Transformasi:
+    - 'nodes' -> 'entity'
+    - 'links' -> 'link'
+    - 'source'/'target' -> 's'/'d' di dalam setiap link
+    """
+    # 1. Konversi graf ke dictionary, hilangkan warning dengan menambahkan `edges="links"`
+    network_data_raw = nx.node_link_data(network_graph, edges="links")
+    
+    # 2. Ubah struktur dictionary agar sesuai dengan format yang diharapkan
+    #    'nodes' -> 'entity'
+    #    'links' -> 'link'
+    #    'source'/'target' -> 's'/'d' di dalam setiap link
+    remapped_links = []
+    for link in network_data_raw.get("links", []):
+        new_link = {
+            's': link.pop('source'),
+            'd': link.pop('target'),
+            **link  # Tambahkan sisa atribut (PR, BW, dll)
+        }
+        remapped_links.append(new_link)
+
+    network_data_for_json = {
+        "entity": network_data_raw.get("nodes", []),
+        "link": remapped_links
+    }
+    
+    return network_data_for_json

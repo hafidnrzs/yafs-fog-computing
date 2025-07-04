@@ -96,6 +96,7 @@ def generate_applications(num_apps: int):
 
 
         applications.append({
+            "id": i,
             "name": app_name,
             "deadline": random.uniform(*config.APP_DEADLINE_RANGE),
             "module": app_modules,

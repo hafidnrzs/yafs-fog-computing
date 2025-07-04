@@ -1,5 +1,4 @@
 import random
-import json
 from config import config
 
 def generate_users(network, num_apps):
@@ -22,7 +21,7 @@ def generate_users(network, num_apps):
     # Sesuai paper "Availability-aware...", probabilitas request adalah 0.25
     request_probability = 0.25 
     # Rata-rata request rate adalah 1/557 ms
-    request_rate_avg = 1.0 / 557.0 
+    request_rate = 1.0 / random.randint(200, 1000)
 
     for i in range(num_apps):
         at_least_one_allocated = False
@@ -33,7 +32,7 @@ def generate_users(network, num_apps):
                     "app": str(i),
                     "message": f"M.USER.APP.{i}",
                     "id_resource": gateway_id,
-                    "lambda": request_rate_avg 
+                    "lambda": request_rate 
                 }
                 my_users.append(user)
                 at_least_one_allocated = True
@@ -45,18 +44,10 @@ def generate_users(network, num_apps):
                 "app": str(i),
                 "message": f"M.USER.APP.{i}",
                 "id_resource": gateway_id,
-                "lambda": request_rate_avg
+                "lambda": request_rate
             }
             my_users.append(user)
 
     user_json = {"sources": my_users}
-
-    # Simpan ke file JSON
-    try:
-        with open("data/usersDefinition.json", "w") as f:
-            json.dump(user_json, f, indent=4)
-        print("File 'usersDefinition.json' berhasil dibuat.")
-    except IOError as e:
-        print(f"Gagal menulis file 'usersDefinition.json': {e}")
-        
+    
     return user_json
