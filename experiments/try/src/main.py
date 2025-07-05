@@ -3,6 +3,7 @@ import os
 import random
 import networkx as nx
 
+# Impor library YAFS standar
 from yafs.core import Sim
 from yafs.application import Application, Message
 from yafs.topology import Topology
@@ -11,10 +12,13 @@ from yafs.population import Population
 from yafs.selection import Selection
 from yafs.distribution import exponential_distribution
 
+# Impor dari proyek kita
 from config import config
 
 RESULTS_PATH = "results"
 DATA_PATH = "data"
+
+# --- KELAS KUSTOM DIDEFINISIKAN LANGSUNG DI SINI ---
 
 
 class CustomTopology(Topology):
@@ -25,13 +29,20 @@ class CustomTopology(Topology):
             self.G = nx.Graph()
 
     def load_from_node_link_data(self, json_data):
-        if "nodes" not in json_data or "links" not in json_data:
+        if "entity" not in json_data or "link" not in json_data:
             raise ValueError(
-                "Format JSON tidak valid. Harus mengandung kunci 'nodes' dan 'links'."
+                "Format JSON tidak valid. Harus mengandung kunci 'entity' dan 'link'."
             )
-        self.G = nx.node_link_graph(json_data)
-        for n in self.G.nodes():
-            self.nodeAttributes[n] = self.G.nodes[n]
+        for entity in json_data["entity"]:
+            node_id = entity["id"]
+            attributes = {k: v for k, v in entity.items() if k != "id"}
+            self.G.add_node(node_id, **attributes)
+            self.nodeAttributes[node_id] = entity
+        for link in json_data["link"]:
+            source = link["s"]
+            destination = link["d"]
+            attributes = {k: v for k, v in link.items() if k not in ["s", "d"]}
+            self.G.add_edge(source, destination, **attributes)
         print(
             f"Topologi berhasil dimuat dengan {self.G.number_of_nodes()} node dan {self.G.number_of_edges()} link."
         )
@@ -61,27 +72,9 @@ class JSONPopulation(Population):
 class DeviceSpeedAwareRouting(Selection):
     def __init__(self):
         self.cache = {}
+        self.invalid_cache_value = -1
         self.MAX_CACHE_SIZE = 10000
         super(DeviceSpeedAwareRouting, self).__init__()
-
-    def get_path(
-        self, sim, app_name, message, topology_src, alloc_module, traffic, from_des
-    ):
-        node_src = topology_src
-        DES_dst = alloc_module[app_name][message.dst]
-        if len(self.cache) > self.MAX_CACHE_SIZE:
-            items_to_delete = random.sample(
-                list(self.cache.keys()), len(self.cache) // 2
-            )
-            for item in items_to_delete:
-                del self.cache[item]
-        cache_key = (node_src, tuple(DES_dst))
-        if cache_key not in self.cache:
-            self.cache[cache_key] = self.compute_DSAR(
-                node_src, sim.alloc_DES, sim, DES_dst, message
-            )
-        path, des = self.cache[cache_key]
-        return [path] if des is not None else [], [des] if des is not None else []
 
     def compute_DSAR(self, node_src, alloc_DES, sim, DES_dst, message):
         try:
@@ -94,34 +87,104 @@ class DeviceSpeedAwareRouting(Selection):
                 speed = 0
                 for i in range(len(path) - 1):
                     link = (path[i], path[i + 1])
-                    bw_ms = sim.topology.G.edges[link][Topology.LINK_BW] / 1000.0
-                    speed += sim.topology.G.edges[link][Topology.LINK_PR] + (
+                    bw_bps = sim.topology.G.edges[link][Topology.LINK_BW]
+                    pr_ms = sim.topology.G.edges[link][Topology.LINK_PR]
+                    bw_ms = bw_bps / 1000.0
+                    transmission_delay = (
                         message.bytes * 8 / bw_ms if bw_ms > 0 else float("inf")
                     )
+                    speed += pr_ms + transmission_delay
                 att_node = sim.topology.get_nodes_att()[path[-1]]
-                speed += message.inst / float(att_node["IPT"])
+                time_service = message.inst / float(att_node["IPT"])
+                speed += time_service
                 if speed < bestSpeed:
                     bestSpeed, minPath, bestDES = speed, path, dev
             return minPath, bestDES
         except (nx.NetworkXNoPath, nx.NodeNotFound):
             return [], None
 
+    def get_path(
+        self,
+        sim,
+        app_name,
+        message,
+        topology_src,
+        alloc_DES,
+        alloc_module,
+        traffic,
+        from_des,
+    ):
+        node_src = topology_src
+        DES_dst = alloc_module[app_name][message.dst]
+        currentNodes = len(sim.topology.G.nodes)
+        if self.invalid_cache_value != currentNodes:
+            self.invalid_cache_value, self.cache = currentNodes, {}
+        if len(self.cache) > self.MAX_CACHE_SIZE:
+            for item in random.sample(list(self.cache.keys()), len(self.cache) // 2):
+                del self.cache[item]
+            self.logger.warning("Cache is too big, it is cleaned!")
+        cache_key = (node_src, tuple(DES_dst))
+        if cache_key not in self.cache:
+            self.cache[cache_key] = self.compute_DSAR(
+                node_src, alloc_DES, sim, DES_dst, message
+            )
+        path, des = self.cache[cache_key]
+        return [path] if des is not None else [], [des] if des is not None else []
+
+    def get_path_from_failure(
+        self, sim, message, link, alloc_DES, alloc_module, traffic, ctime, from_des
+    ):
+        idx = message.path.index(link[0])
+        if idx == len(message.path):
+            return [], []
+        node_src = message.path[idx]
+        path, des = self.get_path(
+            sim,
+            message.app_name,
+            message,
+            node_src,
+            alloc_DES,
+            alloc_module,
+            traffic,
+            from_des,
+        )
+        if path and len(path[0]) > 0:
+            concPath = message.path[0 : message.path.index(path[0][0])] + path[0]
+            return [concPath], des
+        return [], []
+
 
 def create_applications_from_json(app_definitions):
+    """
+    Membuat dictionary dari objek Application YAFS dengan identifikasi SINK yang benar.
+    """
     applications = {}
     for app_def in app_definitions:
         a = Application(name=app_def["name"])
+
+        # 1. Temukan semua modul yang menghasilkan pesan keluar
+        producer_modules = {
+            tx["module"]
+            for tx in app_def.get("transmission", [])
+            if "message_out" in tx
+        }
+
+        # 2. Definisikan modul dengan tipe yang benar
         modules = [{"None": {"Type": Application.TYPE_SOURCE}}]
-        for module in app_def["module"]:
+        for module_def in app_def["module"]:
+            module_name = module_def["name"]
+            # Sebuah modul adalah SINK jika ia tidak ada dalam daftar produsen
+            module_type = (
+                Application.TYPE_MODULE
+                if module_name in producer_modules
+                else Application.TYPE_SINK
+            )
+
             modules.append(
-                {
-                    module["name"]: {
-                        "RAM": module["RAM"],
-                        "Type": Application.TYPE_MODULE,
-                    }
-                }
+                {module_name: {"RAM": module_def["RAM"], "Type": module_type}}
             )
         a.set_modules(modules)
+
         messages = {}
         for msg_def in app_def["message"]:
             messages[msg_def["name"]] = Message(
@@ -133,17 +196,15 @@ def create_applications_from_json(app_definitions):
             )
             if msg_def["s"] == "None":
                 a.add_source_messages(messages[msg_def["name"]])
+
         for transmission in app_def["transmission"]:
+            module_name = transmission["module"]
             msg_in = messages[transmission["message_in"]]
             if "message_out" in transmission:
-                a.add_service_module(
-                    transmission["module"],
-                    msg_in,
-                    messages[transmission["message_out"]],
-                    lambda: 1.0,
-                )
+                msg_out = messages[transmission["message_out"]]
+                a.add_service_module(module_name, msg_in, msg_out, lambda: 1.0)
             else:
-                a.add_service_module(transmission["module"], msg_in)
+                a.add_service_module(module_name, msg_in)
         applications[app_def["name"]] = a
     return applications
 
@@ -165,6 +226,7 @@ def main():
             f"Error: Pastikan semua file definisi ada. File yang hilang: {e.filename}"
         )
         return
+
     print("2. Membangun topologi...")
     topology = CustomTopology()
     topology.load_from_node_link_data(network_json)
@@ -174,9 +236,11 @@ def main():
     placement = JSONPlacement(name="FSPCN_Placement", json=placement_json)
     print("5. Menggunakan selector DeviceSpeedAwareRouting...")
     selector = DeviceSpeedAwareRouting()
-    stop_time = 100000
+
+    stop_time = 10000
     results_folder = os.path.join(RESULTS_PATH, f"sim_trace_{stop_time}ms")
     s = Sim(topology, default_results_path=results_folder)
+
     print("6. Mendeploy aplikasi ke simulator...")
     for app_name, app_obj in applications.items():
         app_users = [u for u in users_json["sources"] if u["app"] == app_name]
@@ -188,12 +252,11 @@ def main():
         s.deploy_app2(
             app=app_obj, placement=placement, population=pop_app, selector=selector
         )
+
     print(f"\n7. Menjalankan simulasi hingga waktu {stop_time}...")
-    s.run(stop_time, show_progress_monitor=True)
-    print(
-        "\n--- Simulasi Selesai ---\n"
-        + f"Hasil simulasi (trace CSV) disimpan di folder: {results_folder}"
-    )
+    s.run(stop_time)
+    print("\n--- Simulasi Selesai ---")
+    print(f"Hasil simulasi (trace CSV) disimpan di folder: {results_folder}")
 
 
 if __name__ == "__main__":
