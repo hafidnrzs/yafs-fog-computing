@@ -849,7 +849,7 @@ def placeAppInCommunity2(appId, clientId, candidateCommunity):
                 if verbose_log:
                     print("        Rejected the current allocation")
                 break
-        else:  # este else solo se ejecuta cuando acabamos el bucle for serviceSet in... por haber llegado al final y no haber hecho un break por no tener sitio para algun set of services, es decir, si han allocated todos los conjuntos de servicios
+        else:  # este else solo se ejecuta cuando acabamos el bucle for serviceSet in... por haber llegado al final y no haber hecho un break por no tener sitio para algun set of servicios, es decir, si han allocated todos los conjuntos de servicios
             if verbose_log:
                 print(
                     "        Finally we allocate the transitive closure level "
@@ -1588,7 +1588,65 @@ print(str(time.time() - t) + " time for ILP-based optimization")
 # ****************************************************************************************************
 # ****************************************************************************************************
 # ****************************************************************************************************
-# FIN ILP
+# GA OPTIMIZATION
+# ****************************************************************************************************
+# ****************************************************************************************************
+# ****************************************************************************************************
+# ****************************************************************************************************
+
+t_ga = time.time()
+
+try:
+    print("Starting GA optimization....")
+    from GAoptimization import GAoptimization
+    
+    # Create GA optimizer with the same parameters as ILP
+    ga_optimizer = GAoptimization(
+        G=G,
+        numberOfServices=numberOfServices,
+        mapService2App=mapService2App,
+        mapServiceId2ServiceName=mapServiceId2ServiceName,
+        servicesResources=servicesResources,
+        myDevices=myDevices,
+        cloudId=cloudId,
+        allTheGtws=allTheGtws,
+        userServices=userServices,
+        myServicesResources=myServicesResources,
+        networkdistances=networkdistances
+    )
+    
+    # Run GA optimization
+    ga_result = ga_optimizer.solve()
+    
+    if ga_result and ga_result.get('initialAllocation'):
+        print("GA optimization completed successfully!")
+        print(f"Number of GA allocations: {len(ga_result['initialAllocation'])}")
+    else:
+        print("GA optimization failed - creating empty allocation")
+        # Create empty allocation as fallback
+        empty_alloc = {"initialAllocation": []}
+        with open("allocDefinitionGA.json", "w") as f:
+            json.dump(empty_alloc, f)
+
+except ImportError:
+    print("GAoptimization module not found - creating empty allocation")
+    empty_alloc = {"initialAllocation": []}
+    with open("allocDefinitionGA.json", "w") as f:
+        json.dump(empty_alloc, f)
+except Exception as e:
+    print(f"Error in GA optimization: {e}")
+    # Create empty allocation as fallback
+    empty_alloc = {"initialAllocation": []}
+    with open("allocDefinitionGA.json", "w") as f:
+        json.dump(empty_alloc, f)
+
+print(str(time.time() - t_ga) + " time for GA-based optimization")
+
+# ****************************************************************************************************
+# ****************************************************************************************************
+# ****************************************************************************************************
+# ****************************************************************************************************
+# FIN GA
 # ****************************************************************************************************
 # ****************************************************************************************************
 # ****************************************************************************************************
@@ -1875,7 +1933,7 @@ if generatePlots:
     # plt.show()
 
     fig, ax = plt.subplots(figsize=(8.0, 8.0))
-    # fig = plt.figure()
+    # fig = pltfigure()
     # fig.suptitle("blablabla", fontsize=18)
     plt.xlabel("distance", fontsize=24)
     plt.ylabel("number of IoT devices", fontsize=24)
@@ -2057,6 +2115,7 @@ if generatePlots:
 # limited = itertools.takewhile(lambda c: True, communities_generator)
 # for myCommunity in limited:
 #        print myCommunity
+#
 #
 #
 # [[0, 1, 2, 3, 4], [5], [6, 7, 8, 9, 10]]

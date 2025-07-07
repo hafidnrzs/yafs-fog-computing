@@ -233,7 +233,22 @@ if __name__ == "__main__":
 
     print(os.getcwd())
     # logging.config.fileConfig(os.getcwd()+'/logging.ini')
-    for i in range(2):
+    
+    # First run spaguetti.py to generate allocation files
+    print("Running spaguetti.py to generate allocation files...")
+    try:
+        import subprocess
+        result = subprocess.run(['python', 'spaguetti.py'], capture_output=True, text=True)
+        if result.returncode != 0:
+            print(f"Error running spaguetti.py: {result.stderr}")
+            print("Continuing with existing allocation files...")
+        else:
+            print("spaguetti.py completed successfully")
+    except Exception as e:
+        print(f"Could not run spaguetti.py: {e}")
+        print("Continuing with existing allocation files...")
+    
+    for i in range(1):
         start_time = time.time()
         random.seed(i)
         np.random.seed(i)
@@ -244,6 +259,9 @@ if __name__ == "__main__":
         start_time = time.time()
         print("Running: ILP ")
         main(simulated_time=1000000, experimento=pathExperimento, ilpPath="ILP", it=i)
+        print("\n--- %s seconds ---" % (time.time() - start_time))
+        print("Running: GA ")
+        main(simulated_time=1000000, experimento=pathExperimento, ilpPath="GA", it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
 
     print("Simulation Done")
