@@ -12,31 +12,16 @@
    ```
    pip install -e .
    ```
-4. Jalankan kode program
+4. Jalankan kode untuk generate file awal
    ```
-   cd fspcn-paper
-   python main.py
+   cd experiments\PartitionILPPlacement
+   python spaguetti.py
    ```
-
-Hasil akan tersimpan pada folder results yang terdiri dari file `graph_barabasi_albert_2.gexf` dan visualisasi `topology_visualization.png`
+5. Jalankan kode untuk simulasi
+   ```
+   python main_nf.py
+   ```
 
 ## Citation
 
-This project uses [YAFS (Yet Another Fog Simulator)](https://github.com/acsicuib/YAFS).  
-If you use this project, please cite YAFS as follows:
-
-```bibtex
- @ARTICLE{8758823,
-    author={I. {Lera} and C. {Guerrero} and C. {Juiz}},
-    journal={IEEE Access},
-    title={YAFS: A Simulator for IoT Scenarios in Fog Computing},
-    year={2019},
-    volume={7},
-    number={},
-    pages={91745-91758},
-    keywords={Relays;Large scale integration;Wireless communication;OFDM;Interference cancellation;Channel estimation;Real-time systems;Complex networks;fog computing;Internet of Things;simulator},
-    doi={10.1109/ACCESS.2019.2927895},
-    ISSN={2169-3536},
-    month={},
-    }
-```
+This project uses [YAFS (Yet Another Fog Simulator)](https://github.com/acsicuib/YAFS).
