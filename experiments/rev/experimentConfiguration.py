@@ -23,6 +23,9 @@ class experimentConfiguration:
         self.CLOUDBW = 999
         self.CLOUDPR = 99
         self.PERCENTATGEOFGATEWAYS = 0.2
+        self.PERCENTAGEOFCLOUDGATEWAYS = (
+            0.05  # Default percentage of nodes that are cloud gateways
+        )
         self.func_PROPAGATIONTIME = "random.randint(10,10)"
         self.func_BANDWITDH = "random.randint(100,100)"
         self.func_SERVICEINSTR = "random.randint(100,100)"
@@ -64,7 +67,7 @@ class experimentConfiguration:
                     self.myUsers.append(myOneUser)
                     atLeastOneAllocated = True
             if not atLeastOneAllocated:
-                j = random.randint(0, len(self.gatewaysDevices) - 1)
+                j = random.choice(list(self.gatewaysDevices))
                 myOneUser = {}
                 myOneUser["app"] = str(i)
                 myOneUser["message"] = "M.USER.APP." + str(i)
@@ -302,18 +305,25 @@ class experimentConfiguration:
         self.gatewaysDevices = set()
         self.cloudgatewaysDevices = set()
 
-        highestCentrality = centralityValues[0][1]
+        # Calculate number of cloud gateways based on percentage
+        # Cloud gateways are the nodes with highest centrality that connect directly to cloud
+        numCloudGateways = max(
+            1, int(self.PERCENTAGEOFCLOUDGATEWAYS * len(self.G.nodes))
+        )
 
-        for device in centralityValues:
-            if device[1] == highestCentrality:
-                self.cloudgatewaysDevices.add(device[0])
+        # Select top nodes with HIGHEST centrality as cloud gateways
+        for i in range(numCloudGateways):
+            if i < len(centralityValues):
+                self.cloudgatewaysDevices.add(centralityValues[i][0])
 
-        initialIndx = int(
-            (1 - self.PERCENTATGEOFGATEWAYS) * len(self.G.nodes)
-        )  # Indice del final para los X tanto por ciento nodos
+        # Select regular gateways from LOWEST centrality nodes (bottom 25%)
+        # Calculate how many nodes to select from the bottom
+        numGateways = int(self.PERCENTATGEOFGATEWAYS * len(self.G.nodes))
 
-        for idDev in range(initialIndx, len(self.G.nodes)):
-            self.gatewaysDevices.add(centralityValues[idDev][0])
+        # Select from the end of the list (lowest centrality values)
+        for idDev in range(len(centralityValues) - numGateways, len(centralityValues)):
+            if idDev >= 0:  # Safety check
+                self.gatewaysDevices.add(centralityValues[idDev][0])
 
         self.cloudId = len(self.G.nodes)
         myNode = {}
@@ -354,6 +364,7 @@ class experimentConfiguration:
 
             # NETWORK
             self.PERCENTATGEOFGATEWAYS = 0.25
+            self.PERCENTAGEOFCLOUDGATEWAYS = 0.05
             self.func_PROPAGATIONTIME = "random.randint(5,5)"  # MS
             self.func_BANDWITDH = "random.randint(75000,75000)"  # BYTES / MS
             self.func_NETWORKGENERATION = "nx.barabasi_albert_graph(n=100, m=2)"  # algorithm for the generation of the network topology
