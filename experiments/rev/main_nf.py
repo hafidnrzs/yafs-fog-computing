@@ -232,7 +232,7 @@ if __name__ == "__main__":
     # import logging.config
     import os
 
-    pathExperimento = "data/10/"
+    pathExperimento = "data/80/"
     resultsPath = "results/"
     # pathExperimento = "exp_rev/"
     # pathExperimento = "/home/uib/src/YAFS/src/examples/PartitionILPPlacement/exp_rev/"
