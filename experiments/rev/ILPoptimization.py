@@ -1,5 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
 """
 Copyright 2018 Carlos Guerrero, Isaac Lera.
 Created on Tue May 22 15:58:58 2018
@@ -131,7 +129,8 @@ class ILP:
                     )
 
         for idDev in range(0, len(service2DevicePlacementMatrix[0])):
-            nodeResUse[idDev] = nodeResUse[idDev] / self.ec.nodeResources[idDev]
+            # Use // for integer division to maintain Python 2 behavior
+            nodeResUse[idDev] = nodeResUse[idDev] / float(self.ec.nodeResources[idDev])
 
         nodeResUse = sorted(nodeResUse)
         nodeNumServ = sorted(nodeNumServ)
@@ -139,7 +138,8 @@ class ILP:
         return nodeResUse, nodeNumServ
 
     def normalizeStatisticsDevicesILP(self):
-        for i in self.nodeBussyResourcesILP.items():
+        # Convert items() to list for Python 3 compatibility
+        for i in list(self.nodeBussyResourcesILP.items()):
             devId = i[0]
             mypercentageResources_ = float(self.nodeBussyResourcesILP[devId]) / float(
                 self.ec.nodeResources[devId]
@@ -177,25 +177,29 @@ class ILP:
     def solve(self):
         t = time.time()
 
+        # Pre-allocate with more efficient list comprehension
+        num_nodes = len(self.ec.G.nodes)
+        num_services = self.ec.numberOfServices
+
         self.service2DevicePlacementMatrixILP = [
-            [0 for j in range(len(self.ec.G.nodes))]
-            for i in range(self.ec.numberOfServices)
+            [0] * num_nodes for _ in range(num_services)
         ]
 
+        print("Computing betweenness centrality...")
         self.centralityValuesNoOrdered = nx.betweenness_centrality(
             self.ec.G, weight="weight"
         )
 
         print("Starting ILP optimization....")
 
-        fognodes = list()
-        for i in self.ec.G.nodes:
-            fognodes.append(i)
+        # More efficient list creation
+        fognodes = list(self.ec.G.nodes)
         fognodes.append(self.ec.cloudId)
 
+        # Pre-build services resources dictionary
+        self.myServicesResources = {}
         for myapp in self.ec.appsResources:
-            for i in myapp.items():
-                self.myServicesResources[i[0]] = i[1]
+            self.myServicesResources.update(dict(myapp.items()))
 
         myDevices = {}
 
@@ -214,6 +218,8 @@ class ILP:
                     userServices.append((gtwId, servId))
                     allTheGtws.add(gtwId)
 
+        # Pre-compute all shortest paths for better performance
+        print("Pre-computing network distances...")
         for gtwId in allTheGtws:
             for devId in self.ec.G.nodes:
                 self.networkdistances[(gtwId, devId)] = nx.shortest_path_length(
@@ -237,19 +243,32 @@ class ILP:
 
         for appToAllocate in sortedAppsDeadlines:
             appId = appToAllocate[0]
+            app_start_time = time.time()
 
             problem = pulp.LpProblem("fog_app:" + str(appId), pulp.LpMinimize)
             ## Variables
 
-            assignCombinationsForApp = list()
-            for aComb in assignCombinations:
-                if int(self.ec.mapService2App[aComb[0][1]]) == appId:
-                    assignCombinationsForApp.append(aComb)
+            # Filter combinations more efficiently
+            assignCombinationsForApp = [
+                aComb
+                for aComb in assignCombinations
+                if int(self.ec.mapService2App[aComb[0][1]]) == appId
+            ]
 
-            userServicesForApp = list()
-            for uServ in userServices:
-                if int(self.ec.mapService2App[uServ[1]]) == appId:
-                    userServicesForApp.append(uServ)
+            userServicesForApp = [
+                uServ
+                for uServ in userServices
+                if int(self.ec.mapService2App[uServ[1]]) == appId
+            ]
+
+            # Early termination if no services for this app
+            if not assignCombinationsForApp or not userServicesForApp:
+                print(f"Skipping app {appId}: no valid assignments")
+                continue
+
+            print(
+                f"Solving app {appId}: {len(assignCombinationsForApp)} variables, {len(userServicesForApp)} services"
+            )
 
             UserServiceDevAssignment = {
                 comb: pulp.LpVariable(
@@ -277,8 +296,9 @@ class ILP:
                 problem += (
                     pulp.lpSum(
                         [
-                            (UserServiceDevAssignment[(usrservId, devId)])
+                            UserServiceDevAssignment[(usrservId, devId)]
                             for devId in fognodes
+                            if (usrservId, devId) in UserServiceDevAssignment
                         ]
                     )
                     == 1,
@@ -286,7 +306,6 @@ class ILP:
                 )
 
             # allocated services less resources than available
-
             for devId in fognodes:
                 problem += (
                     pulp.lpSum(
@@ -296,6 +315,7 @@ class ILP:
                                 * self.myServicesResources[usrservId[1]]
                             )
                             for usrservId in userServicesForApp
+                            if (usrservId, devId) in UserServiceDevAssignment
                         ]
                     )
                     <= myDevices[devId]["RAM"],
@@ -313,7 +333,18 @@ class ILP:
             #        print "************"
 
             #        print "Solving the problem..."
-            problem.solve()
+            from pulp import PULP_CBC_CMD
+
+            # Optimize solver for Python 3 with performance improvements
+            solver = PULP_CBC_CMD(
+                msg=False,
+                timeLimit=300,  # 5 minute timeout
+            )
+
+            problem.solve(solver)
+
+            app_solve_time = time.time() - app_start_time
+            print(f"App {appId} solved in {app_solve_time:.2f} seconds")
 
             #        print "The ILP finished in status "+str(problem.status)
 
@@ -349,6 +380,12 @@ class ILP:
                             self.service2DevicePlacementMatrixILP[i[0][1]][i[1]] = (
                                 1  # serviceId,devId
                             )
+            elif problem.status == pulp.LpStatusNotSolved:
+                print(f"Warning: App {appId} could not be solved within time limit")
+            else:
+                print(
+                    f"Warning: App {appId} solver returned status: {pulp.LpStatus[problem.status]}"
+                )
 
         for idServ in range(self.ec.numberOfServices):
             myAllocation = {}

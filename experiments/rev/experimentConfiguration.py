@@ -77,6 +77,10 @@ class experimentConfiguration:
         userJson["sources"] = self.myUsers
 
         file = open(self.cnf.resultFolder + "/usersDefinition.json", "w")
+        print(
+            "Users definition generated in",
+            self.cnf.resultFolder + "/usersDefinition.json",
+        )
         file.write(json.dumps(userJson))
         file.close()
 
@@ -237,6 +241,10 @@ class experimentConfiguration:
             appJson.append(myApp)
 
         file = open(self.cnf.resultFolder + "/appDefinition.json", "w")
+        print(
+            "Application definition generated in",
+            self.cnf.resultFolder + "/appDefinition.json",
+        )
         file.write(json.dumps(appJson))
         file.close()
 
@@ -328,6 +336,10 @@ class experimentConfiguration:
         netJson["link"] = myEdges
 
         file = open(self.cnf.resultFolder + "/networkDefinition.json", "w")
+        print(
+            "Network definition generated in",
+            self.cnf.resultFolder + "/networkDefinition.json",
+        )
         file.write(json.dumps(netJson))
         file.close()
 

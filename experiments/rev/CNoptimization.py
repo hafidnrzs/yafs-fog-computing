@@ -180,7 +180,7 @@ class CNoptimization:
                                         + " in community "
                                         + str(myCommunity[0])
                                     )
-                                for servId, deviceId in servicePlacement.iteritems():
+                                for servId, deviceId in servicePlacement.items():
                                     self.service2DevicePlacementMatrix[servId][
                                         deviceId
                                     ] = 1
