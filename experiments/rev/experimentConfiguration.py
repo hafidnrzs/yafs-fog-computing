@@ -372,7 +372,7 @@ class experimentConfiguration:
             self.func_NODESPEED = "random.randint(100,1000)"  # INTS / MS #random distribution for the speed of the fog devices
 
             # APP and SERVICES
-            self.TOTALNUMBEROFAPPS = 10
+            self.TOTALNUMBEROFAPPS = 20
             self.func_APPGENERATION = "nx.gn_graph(random.randint(2,10))"  # algorithm for the generation of the random applications
             self.func_SERVICEINSTR = "random.randint(20000,60000)"  # INSTR --> teniedno en cuenta nodespped esto nos da entre 200 y 600 MS
             self.func_SERVICEMESSAGESIZE = "random.randint(1500000,4500000)"  # BYTES y teniendo en cuenta net bandwidth nos da entre 20 y 60 MS
