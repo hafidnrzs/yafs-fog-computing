@@ -33,7 +33,7 @@ class myConfig:
     def __init__(self):
         self.graphicTerminal = False
         self.verbose_log = False
-        self.myConfiguration_ = "iotjournal"
+        self.myConfiguration_ = "exp"
         self.resultFolder = "data"
 
         try:

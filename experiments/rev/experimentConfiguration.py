@@ -1,5 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
 """
 Created on Tue Oct  2 11:52:43 2018
 
@@ -7,9 +5,7 @@ Created on Tue Oct  2 11:52:43 2018
 """
 
 import networkx as nx
-import time
 import operator
-import copy
 import json
 import random
 
@@ -20,12 +16,11 @@ class experimentConfiguration:
         self.TOTALNUMBEROFAPPS = 1
         self.CLOUDCAPACITY = 9999999999999999
         self.CLOUDSPEED = 9999
+        self.CLOUDSTORAGE = 99999
         self.CLOUDBW = 999
         self.CLOUDPR = 99
         self.PERCENTATGEOFGATEWAYS = 0.2
-        self.PERCENTAGEOFCLOUDGATEWAYS = (
-            0.05  # Default percentage of nodes that are cloud gateways
-        )
+        self.PERCENTAGEOFCLOUDGATEWAYS = 0.05
         self.func_PROPAGATIONTIME = "random.randint(10,10)"
         self.func_BANDWITDH = "random.randint(100,100)"
         self.func_SERVICEINSTR = "random.randint(100,100)"
@@ -33,9 +28,9 @@ class experimentConfiguration:
         self.func_NETWORKGENERATION = "nx.barbell_graph(5, 1)"  # algorithm for the generation of the network topology
         self.func_NODERESOURECES = "random.randint(1,1)"  # random distribution for the resources of the fog devices
         self.func_NODESPEED = "random.randint(100,1000)"  # random distribution for the speed of the fog devices
+        self.func_NODESTORAGE = "random.uniform(1,10)" # TB of fog devices storage
         self.func_APPGENERATION = "nx.gn_graph(random.randint(2,3))"  # algorithm for the generation of the random applications
-        self.func_REQUESTPROB = "random.random()/4"  # Popularidad de la app. threshold que determina la probabilidad de que un dispositivo tenga asociado peticiones a una app. tle threshold es para cada ap
-        self.func_REQUESTPROB = "1.0"  # Popularidad de la app. threshold que determina la probabilidad de que un dispositivo tenga asociado peticiones a una app. tle threshold es para cada ap
+        self.func_REQUESTPROB = "random.random()/4"  # App popularity. Threshold that determines the probability that a device has requests associated with an app. The threshold is for each app
         self.func_SERVICERESOURCES = "10"
         self.func_APPDEADLINE = "(random.random()*4)"
         self.func_USERREQRAT = "random.random()"
@@ -259,7 +254,6 @@ class experimentConfiguration:
         # TOPOLOGY GENERATION
 
         self.G = eval(self.func_NETWORKGENERATION)
-        # G = nx.barbell_graph(5, 1)
         if self.cnf.graphicTerminal:
             nx.draw(self.G)
 
@@ -268,9 +262,11 @@ class experimentConfiguration:
         self.nodeResources = {}
         self.nodeFreeResources = {}
         self.nodeSpeed = {}
+        self.nodeStorage = {}
         for i in self.G.nodes:
             self.nodeResources[i] = eval(self.func_NODERESOURECES)
             self.nodeSpeed[i] = eval(self.func_NODESPEED)
+            self.nodeStorage[i] = eval(self.func_NODESTORAGE)
 
         for e in self.G.edges:
             self.G[e[0]][e[1]]["PR"] = eval(self.func_PROPAGATIONTIME)
@@ -279,13 +275,6 @@ class experimentConfiguration:
         # JSON EXPORT
 
         netJson = {}
-
-        for i in self.G.nodes:
-            myNode = {}
-            myNode["id"] = i
-            myNode["RAM"] = self.nodeResources[i]
-            myNode["IPT"] = self.nodeSpeed[i]
-            self.devices.append(myNode)
 
         myEdges = list()
         for e in self.G.edges:
@@ -297,6 +286,7 @@ class experimentConfiguration:
 
             myEdges.append(myLink)
 
+        # Calculate network centrality
         centralityValuesNoOrdered = nx.betweenness_centrality(self.G, weight="weight")
         centralityValues = sorted(
             centralityValuesNoOrdered.items(), key=operator.itemgetter(1), reverse=True
@@ -325,11 +315,30 @@ class experimentConfiguration:
             if idDev >= 0:  # Safety check
                 self.gatewaysDevices.add(centralityValues[idDev][0])
 
+        # Create devices with appropriate types based on gateway classification
+        for i in self.G.nodes:
+            myNode = {}
+            myNode["id"] = i
+            myNode["RAM"] = self.nodeResources[i]
+            myNode["IPT"] = self.nodeSpeed[i]
+            myNode["TB"] = self.nodeStorage[i]
+            
+            # Assign type based on gateway classification
+            if i in self.cloudgatewaysDevices:
+                myNode["type"] = "CFG"  # Cloud-Fog Gateway
+            elif i in self.gatewaysDevices:
+                myNode["type"] = "FG"   # Fog Gateway
+            else:
+                myNode["type"] = "FOG"  # Regular Fog Node
+            
+            self.devices.append(myNode)
+
         self.cloudId = len(self.G.nodes)
         myNode = {}
         myNode["id"] = self.cloudId
         myNode["RAM"] = self.CLOUDCAPACITY
         myNode["IPT"] = self.CLOUDSPEED
+        myNode["TB"] = self.CLOUDSTORAGE
         myNode["type"] = "CLOUD"
         self.devices.append(myNode)
 
@@ -354,54 +363,33 @@ class experimentConfiguration:
         file.close()
 
     def loadConfiguration(self, myConfiguration_):
-        # Configuration for the IEEE IoT journal experiments
-        if myConfiguration_ == "iotjournal":
+        # Configuration for experiment
+        if myConfiguration_ == "exp":
             # CLOUD
             self.CLOUDCAPACITY = 9999999999999999  # MB RAM
+            self.CLOUDSTORAGE = 99999  # TB Storage
             self.CLOUDSPEED = 10000  # INSTR x MS
             self.CLOUDBW = 125000  # BYTES / MS --> 1000 Mbits/s
             self.CLOUDPR = 1  # MS
 
             # NETWORK
-            self.PERCENTATGEOFGATEWAYS = 0.25
-            self.PERCENTAGEOFCLOUDGATEWAYS = 0.05
-            self.func_PROPAGATIONTIME = "random.randint(5,5)"  # MS
+            self.PERCENTATGEOFGATEWAYS = 0.25 # Percentage of nodes that considered as fog gateways (FG)
+            self.PERCENTAGEOFCLOUDGATEWAYS = 0.05 # Percentage of nodes that considered as cloud-fog gateways (CFG)
+            self.func_PROPAGATIONTIME = "random.randint(3,5)"  # MS
             self.func_BANDWITDH = "random.randint(75000,75000)"  # BYTES / MS
             self.func_NETWORKGENERATION = "nx.barabasi_albert_graph(n=100, m=2)"  # algorithm for the generation of the network topology
             self.func_NODERESOURECES = "random.randint(10,25)"  # MB RAM #random distribution for the resources of the fog devices
             self.func_NODESPEED = "random.randint(100,1000)"  # INTS / MS #random distribution for the speed of the fog devices
+            self.func_NODESTORAGE = "random.uniform(0.2,100)" # TB of fog devices storage
 
             # APP and SERVICES
-            self.TOTALNUMBEROFAPPS = 80
+            self.TOTALNUMBEROFAPPS = 20
             self.func_APPGENERATION = "nx.gn_graph(random.randint(2,10))"  # algorithm for the generation of the random applications
-            self.func_SERVICEINSTR = "random.randint(20000,60000)"  # INSTR --> teniedno en cuenta nodespped esto nos da entre 200 y 600 MS
-            self.func_SERVICEMESSAGESIZE = "random.randint(1500000,4500000)"  # BYTES y teniendo en cuenta net bandwidth nos da entre 20 y 60 MS
-            self.func_SERVICERESOURCES = "random.randint(1,6)"  # MB de ram que consume el servicio, teniendo en cuenta noderesources y appgeneration tenemos que nos caben aprox 1 app por nodo o unos 10 servicios
+            self.func_SERVICEINSTR = "random.randint(20000,60000)"  # INSTR --> taking into account NODESPEED, this gives us between 200 and 600 MS
+            self.func_SERVICEMESSAGESIZE = "random.randint(1500000,4500000)"  # BYTES and taking account net bandwidth gives us between 20 and 60 MS
+            self.func_SERVICERESOURCES = "random.randint(1,6)"  # MB of RAM consumed by the service, taking into account NODERESOURCES and application generation, we have approximately 1 app per node or about 10 services
             self.func_APPDEADLINE = "random.randint(2600,6600)"  # MS
 
             # USERS and IoT DEVICES
-            self.func_REQUESTPROB = "random.random()/4"  # Popularidad de la app. threshold que determina la probabilidad de que un dispositivo tenga asociado peticiones a una app. tle threshold es para cada ap
+            self.func_REQUESTPROB = "random.random()/4"  # App popularity. Threshold that determines the probability that a device has requests associated with an app. The threshold is for each app
             self.func_USERREQRAT = "random.randint(200,1000)"  # MS
-
-            # self.myDeadlines = [
-            #     487203.22,
-            #     487203.22,
-            #     487203.22,
-            #     474.51,
-            #     302.05,
-            #     831.04,
-            #     793.26,
-            #     1582.21,
-            #     2214.64,
-            #     374046.40,
-            #     420476.14,
-            #     2464.69,
-            #     97999.14,
-            #     2159.73,
-            #     915.16,
-            #     1659.97,
-            #     1059.97,
-            #     322898.56,
-            #     1817.51,
-            #     406034.73,
-            # ]
