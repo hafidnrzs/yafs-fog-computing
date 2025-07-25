@@ -22,6 +22,7 @@ setup(
         "pyproj",
         "scipy",
         "smopy",
+        "ipykernel",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
