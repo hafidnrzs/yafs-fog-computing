@@ -269,8 +269,8 @@ class Sim:
                 size_bits = message.bytes
                 #size_bits = message.bytes * 8
                 try:
-                   # transmit = size_bits / (self.topology.get_edge(link)[Topology.LINK_BW] * 1000000.0)  # MBITS!
-                    transmit = size_bits / (self.topology.get_edge(link)[Topology.LINK_BW] * 1000000.0)  # MBITS!
+                    transmit = size_bits / (self.topology.get_edge(link)[Topology.LINK_BW])
+                    # transmit = size_bits / (self.topology.get_edge(link)[Topology.LINK_BW] * 1000000.0)  # MBITS!
                     propagation = self.topology.get_edge(link)[Topology.LINK_PR]
                     latency_msg_link = transmit + propagation
 
