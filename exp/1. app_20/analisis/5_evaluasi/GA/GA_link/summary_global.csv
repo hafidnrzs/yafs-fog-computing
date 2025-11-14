@@ -1,0 +1,2 @@
+algorithm,avg_latency_global,avg_ADRA,avg_ADSA,avg_throughput,total_messages,min_size,max_size,avg_size
+GA,33.19663092105073,33.19663092105073,,0.30190220924301675,301869,1762012.0,4288355.0,2674370.0391394943

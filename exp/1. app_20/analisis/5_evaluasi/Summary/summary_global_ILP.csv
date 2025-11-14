@@ -1,0 +1,2 @@
+algorithm,total_messages,avg_E2E_latency,avg_processing_time,avg_network_delay,tmin_emit,tmax_reception,window,avg_throughput
+ILP,616855,26.87229637898602,4.412450894628392,26.90085803747099,107.0,999996.771013333,999889.771013333,0.6169230027974499

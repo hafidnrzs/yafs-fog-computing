@@ -1,0 +1,2 @@
+algorithm,avg_latency_global,avg_ADRA,avg_ADSA,avg_throughput,total_messages,min_size,max_size,avg_size
+ILP,32.89573924069932,33.12651039147114,20.076181333333334,0.30190220924301675,301869,1600892.0,4288355.0,2646161.4441065495

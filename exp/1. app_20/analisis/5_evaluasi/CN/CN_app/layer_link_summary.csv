@@ -1,0 +1,3 @@
+src_type,dst_type,avg_network_delay
+FG,CLOUD,138.07253476369996
+CLOUD,CLOUD,0.005932990484701258

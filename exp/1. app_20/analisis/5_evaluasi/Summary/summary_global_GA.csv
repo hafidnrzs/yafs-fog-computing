@@ -1,0 +1,2 @@
+algorithm,total_messages,avg_E2E_latency,avg_processing_time,avg_network_delay,tmin_emit,tmax_reception,window,avg_throughput
+GA,616855,27.60817181607307,4.002954151787107,27.626863341740066,107.0,999996.771013333,999889.771013333,0.6169230027974499

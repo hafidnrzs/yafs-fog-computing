@@ -1,0 +1,40 @@
+ILP
+
+1. extract allocationILP
+python extract_alloc_definition.py --json /Users/adhitya/Project/exp/data/allocDefinitionILP.json --outdir /Users/adhitya/Project/exp/analisis/4_allocation/ILP_alloc --cloud_node_id 100
+
+2. perintah app summary ILP
+python analyze_app_summary.py --csv /Users/adhitya/Project/exp/results/results_ILP_1000000.csv --algo ILP --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/ILP/ILP_app --bin_width 100 --entities /Users/adhitya/Project/exp/analisis/1_network/entity.csv
+
+3. perintah link summary ILP
+python analyze_link_summary.py --csv /Users/adhitya/Project/exp/results/results_ILP_1000000_link.csv --algo ILP --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/ILP/ILP_link
+
+CN
+1. extract allocationCN
+python extract_alloc_definition.py --json /Users/adhitya/Project/exp/data/allocDefinitionCN.json --outdir /Users/adhitya/Project/exp/analisis/4_allocation/CN_alloc --cloud_node_id 100
+
+2. perintah app summary CN
+python analyze_app_summary.py --csv /Users/adhitya/Project/exp/results/results_CN_1000000.csv --algo CN --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/CN/CN_app --bin_width 100 --entities /Users/adhitya/Project/exp/analisis/1_network/entity.csv
+
+3. perintah link summary CN
+python analyze_link_summary.py --csv /Users/adhitya/Project/exp/results/results_CN_1000000_link.csv --algo CN --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/CN/CN_link
+
+WCN
+1. extract allocationWCN
+python extract_alloc_definition.py --json /Users/adhitya/Project/exp/data/allocDefinitionWCN.json --outdir /Users/adhitya/Project/exp/analisis/4_allocation/WCN_alloc --cloud_node_id 100
+
+2. perintah app summary WCN
+python analyze_app_summary.py --csv /Users/adhitya/Project/exp/results/results_WCN_1000000.csv --algo WCN --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/WCN/WCN_app --bin_width 100 --entities /Users/adhitya/Project/exp/analisis/1_network/entity.csv
+
+3. perintah link summary WCN
+python analyze_link_summary.py --csv /Users/adhitya/Project/exp/results/results_WCN_1000000_link.csv --algo WCN --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/WCN/WCN_link
+
+GA
+1. extract allocationGA
+python extract_alloc_definition.py --json /Users/adhitya/Project/exp/data/allocDefinitionGA.json --outdir /Users/adhitya/Project/exp/analisis/4_allocation/GA_alloc --cloud_node_id 100
+
+2. perintah app summary GA
+python analyze_app_summary.py --csv /Users/adhitya/Project/exp/results/results_GA_1000000.csv --algo GA --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/GA/GA_app --bin_width 100 --entities /Users/adhitya/Project/exp/analisis/1_network/entity.csv
+
+3. perintah link summary GA
+python analyze_link_summary.py --csv /Users/adhitya/Project/exp/results/results_GA_1000000_link.csv --algo GA --outdir /Users/adhitya/Project/exp/analisis/5_evaluasi/GA/GA_link

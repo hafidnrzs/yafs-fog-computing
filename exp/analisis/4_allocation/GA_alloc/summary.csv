@@ -1,0 +1,2 @@
+total_services,unique_nodes,cloud_node_id,cloud_services,fog_services,fog_ratio,cloud_ratio
+285,12,100,195,90,0.3157894736842105,0.6842105263157895
